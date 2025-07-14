@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Gráfico de Ecuaciones de Segundo Grado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Simulador Gráfico de Ecuaciones de Segundo Grado</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 mt-2">Visualiza la parábola <span class="font-mono bg-gray-200 dark:bg-gray-700 p-1 rounded">ax² + bx + c</span></p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Panel de Controles -->
+            <div class="lg:col-span-1 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+                <h2 class="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">Controles</h2>
+                <div class="space-y-6">
+                    <!-- Coeficiente a -->
+                    <div>
+                        <label for="a" class="flex justify-between items-center text-lg font-medium text-gray-700 dark:text-gray-300">
+                            <span>Coeficiente 'a'</span>
+                            <span id="a-value" class="font-bold text-indigo-600 dark:text-indigo-400">1.00</span>
+                        </label>
+                        <input type="range" id="a" min="-5" max="5" value="1" step="0.01" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 mt-2">
+                    </div>
+                    <!-- Coeficiente b -->
+                    <div>
+                        <label for="b" class="flex justify-between items-center text-lg font-medium text-gray-700 dark:text-gray-300">
+                            <span>Coeficiente 'b'</span>
+                            <span id="b-value" class="font-bold text-indigo-600 dark:text-indigo-400">0.00</span>
+                        </label>
+                        <input type="range" id="b" min="-10" max="10" value="0" step="0.01" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 mt-2">
+                    </div>
+                    <!-- Coeficiente c -->
+                    <div>
+                        <label for="c" class="flex justify-between items-center text-lg font-medium text-gray-700 dark:text-gray-300">
+                            <span>Coeficiente 'c'</span>
+                            <span id="c-value" class="font-bold text-indigo-600 dark:text-indigo-400">-4.00</span>
+                        </label>
+                        <input type="range" id="c" min="-10" max="10" value="-4" step="0.01" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 mt-2">
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Resultados</h3>
+                    <div class="space-y-3 text-base">
+                        <p><strong>Vértice (V):</strong> <span id="vertex" class="font-mono text-green-600 dark:text-green-400">(0.00, -4.00)</span></p>
+                        <p><strong>Raíz (x₁):</strong> <span id="root1" class="font-mono text-red-600 dark:text-red-400">2.00</span></p>
+                        <p><strong>Raíz (x₂):</strong> <span id="root2" class="font-mono text-red-600 dark:text-red-400">-2.00</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visualización Gráfica -->
+            <div class="lg:col-span-2 bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-lg aspect-w-1 aspect-h-1 md:aspect-w-16 md:aspect-h-9 lg:aspect-w-4 lg:aspect-h-3">
+                 <canvas id="graphCanvas"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Referencias a Elementos del DOM ---
+        const canvas = document.getElementById('graphCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const sliderA = document.getElementById('a');
+        const sliderB = document.getElementById('b');
+        const sliderC = document.getElementById('c');
+
+        const valueA = document.getElementById('a-value');
+        const valueB = document.getElementById('b-value');
+        const valueC = document.getElementById('c-value');
+
+        const vertexEl = document.getElementById('vertex');
+        const root1El = document.getElementById('root1');
+        const root2El = document.getElementById('root2');
+
+        // --- Configuración del Gráfico ---
+        let scale = 40; // Pixels por unidad
+        let originX, originY;
+
+        // --- Función para ajustar el tamaño del Canvas y redibujar ---
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+            originX = canvas.width / 2;
+            originY = canvas.height / 2;
+            draw();
+        }
+
+        // --- Función Principal de Dibujo ---
+        function draw() {
+            // Obtener valores actuales
+            const a = parseFloat(sliderA.value);
+            const b = parseFloat(sliderB.value);
+            const c = parseFloat(sliderC.value);
+
+            // Actualizar etiquetas de valores
+            valueA.textContent = a.toFixed(2);
+            valueB.textContent = b.toFixed(2);
+            valueC.textContent = c.toFixed(2);
+            
+            // Limpiar el canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Dibujar ejes y cuadrícula
+            drawAxes();
+
+            // Dibujar la parábola
+            drawParabola(a, b, c);
+
+            // Calcular y mostrar raíces y vértice
+            calculateAndDisplayResults(a, b, c);
+        }
+
+        // --- Función para Dibujar los Ejes y la Cuadrícula ---
+        function drawAxes() {
+            const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+            const axisColor = isDark ? '#d1d5db' : '#374151'; // gray-300 or gray-700
+            const textColor = isDark ? '#9ca3af' : '#6b7280'; // gray-400 or gray-500
+
+            ctx.beginPath();
+            ctx.strokeStyle = gridColor;
+            ctx.lineWidth = 1;
+
+            // Cuadrícula vertical
+            for (let x = originX + scale; x < canvas.width; x += scale) {
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+            }
+            for (let x = originX - scale; x > 0; x -= scale) {
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+            }
+            // Cuadrícula horizontal
+            for (let y = originY + scale; y < canvas.height; y += scale) {
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+            }
+            for (let y = originY - scale; y > 0; y -= scale) {
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+            }
+            ctx.stroke();
+
+            // Ejes principales
+            ctx.beginPath();
+            ctx.strokeStyle = axisColor;
+            ctx.lineWidth = 2;
+            // Eje X
+            ctx.moveTo(0, originY);
+            ctx.lineTo(canvas.width, originY);
+            // Eje Y
+            ctx.moveTo(originX, 0);
+            ctx.lineTo(originX, canvas.height);
+            ctx.stroke();
+            
+            // Etiquetas de los ejes
+            ctx.fillStyle = textColor;
+            ctx.font = '12px Inter';
+            for(let i = 1; (originX + i * scale) < canvas.width; i++) {
+                ctx.fillText(i, originX + i * scale, originY + 15);
+                ctx.fillText(-i, originX - i * scale, originY + 15);
+            }
+            for(let i = 1; (originY + i * scale) < canvas.height; i++) {
+                ctx.fillText(-i, originX + 5, originY + i * scale);
+                ctx.fillText(i, originX + 5, originY - i * scale);
+            }
+        }
+
+        // --- Función para Dibujar la Parábola ---
+        function drawParabola(a, b, c) {
+            if (a === 0) return; // No es una parábola si a=0
+
+            ctx.beginPath();
+            ctx.strokeStyle = '#4f46e5'; // indigo-600
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+
+            let firstPoint = true;
+            for (let px = 0; px < canvas.width; px++) {
+                const x = (px - originX) / scale;
+                const y = a * x * x + b * x + c;
+                const py = originY - y * scale;
+                
+                if (firstPoint) {
+                    ctx.moveTo(px, py);
+                    firstPoint = false;
+                } else {
+                    ctx.lineTo(px, py);
+                }
+            }
+            ctx.stroke();
+        }
+
+        // --- Función para Calcular Resultados y Dibujar Puntos ---
+        function calculateAndDisplayResults(a, b, c) {
+            // Vértice
+            let vertexX = -b / (2 * a);
+            let vertexY = a * vertexX * vertexX + b * vertexX + c;
+            
+            // Evitar -0.00
+            if (Object.is(vertexX, -0)) vertexX = 0;
+            if (Object.is(vertexY, -0)) vertexY = 0;
+
+            if (a !== 0) {
+                vertexEl.textContent = `(${vertexX.toFixed(2)}, ${vertexY.toFixed(2)})`;
+                drawPoint(vertexX, vertexY, '#16a34a', 'V'); // green-600
+            } else {
+                vertexEl.textContent = 'N/A (Línea recta)';
+            }
+
+
+            // Raíces (Fórmula Cuadrática)
+            const discriminant = b * b - 4 * a * c;
+
+            if (a === 0) { // Ecuación lineal
+                const root = -c / b;
+                root1El.textContent = isFinite(root) ? root.toFixed(2) : 'N/A';
+                root2El.textContent = 'N/A';
+                if(isFinite(root)) drawPoint(root, 0, '#dc2626'); // red-600
+            } else if (discriminant < 0) {
+                root1El.textContent = 'Imaginaria';
+                root2El.textContent = 'Imaginaria';
+            } else if (discriminant === 0) {
+                const root = -b / (2 * a);
+                root1El.textContent = root.toFixed(2);
+                root2El.textContent = '---';
+                drawPoint(root, 0, '#dc2626', 'x'); // red-600
+            } else {
+                const root1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+                const root2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+                root1El.textContent = root1.toFixed(2);
+                root2El.textContent = root2.toFixed(2);
+                drawPoint(root1, 0, '#dc2626', 'x₁'); // red-600
+                drawPoint(root2, 0, '#dc2626', 'x₂'); // red-600
+            }
+        }
+
+        // --- Función Auxiliar para Dibujar un Punto en el Gráfico ---
+        function drawPoint(x, y, color, label = '') {
+            const px = originX + x * scale;
+            const py = originY - y * scale;
+
+            ctx.beginPath();
+            ctx.fillStyle = color;
+            ctx.arc(px, py, 6, 0, 2 * Math.PI);
+            ctx.fill();
+
+            if (label) {
+                ctx.fillStyle = color;
+                ctx.font = 'bold 14px Inter';
+                ctx.fillText(label, px + 10, py - 10);
+            }
+        }
+
+        // --- Event Listeners ---
+        sliderA.addEventListener('input', draw);
+        sliderB.addEventListener('input', draw);
+        sliderC.addEventListener('input', draw);
+        window.addEventListener('resize', resizeCanvas);
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
+
+
+        // --- Inicialización ---
+        resizeCanvas();
+
+    </script>
+</body>
+</html>
