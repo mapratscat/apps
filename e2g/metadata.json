@@ -1,6 +1,0 @@
-{
-  "name": "Visualitzador d'Equacions de 2n Grau",
-  "description": "Una eina interactiva per visualitzar gràficament equacions de segon grau (paràboles). Ajusta els coeficients a, b i c per veure com canvia la forma i la posició de la paràbola en temps real, juntament amb les seves arrels i el seu vèrtex.",
-  "requestFramePermissions": [],
-  "prompt": ""
-}
