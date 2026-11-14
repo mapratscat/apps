@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tres en Ratlla Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .cell {
+            transition: all 0.3s ease;
+        }
+        .cell:hover:not(.occupied) {
+            background-color: rgba(99, 102, 241, 0.1);
+            transform: scale(1.05);
+        }
+        .cell.occupied {
+            cursor: not-allowed;
+        }
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .5;
+            }
+        }
+        .winning-line {
+            animation: highlight 1s ease-in-out;
+        }
+        @keyframes highlight {
+            0%, 100% {
+                background-color: inherit;
+            }
+            50% {
+                background-color: rgba(34, 197, 94, 0.3);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-900 min-h-screen">
+
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 mb-2">
+                Tres en Ratlla Online
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg">Juga amb amics en temps real</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Connection Panel -->
+            <div class="lg:col-span-1 space-y-4">
+                <!-- Connection Card -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Connexió</h2>
+
+                    <div id="connectionSection" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                El teu ID
+                            </label>
+                            <div class="flex gap-2">
+                                <input type="text" id="myId" readonly
+                                    class="flex-1 px-4 py-2 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg font-mono text-sm"
+                                    placeholder="Generant ID...">
+                                <button onclick="copyMyId()"
+                                    class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors">
+                                    Copiar
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Comparteix aquest ID amb el teu amic</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Connectar amb amic
+                            </label>
+                            <div class="flex gap-2">
+                                <input type="text" id="friendId"
+                                    class="flex-1 px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg font-mono text-sm"
+                                    placeholder="Introdueix ID de l'amic">
+                                <button onclick="connectToPeer()"
+                                    class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
+                                    Unir-se
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="statusMessage" class="text-sm text-center p-3 rounded-lg bg-gray-100 dark:bg-gray-700">
+                            <span class="pulse-animation">Inicialitzant...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Info Card -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Informació del joc</h2>
+
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600 dark:text-gray-400">Tu ets:</span>
+                            <span id="yourSymbol" class="text-2xl font-bold">-</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600 dark:text-gray-400">Torn actual:</span>
+                            <span id="currentTurn" class="text-2xl font-bold">-</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600 dark:text-gray-400">Estat:</span>
+                            <span id="gameStatus" class="font-semibold text-gray-700 dark:text-gray-300">Esperant connexió</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <h3 class="font-semibold text-gray-900 dark:text-white mb-2">Puntuació</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Victòries (X):</span>
+                                <span id="scoreX" class="font-bold text-blue-600 dark:text-blue-400">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Victòries (O):</span>
+                                <span id="scoreO" class="font-bold text-red-600 dark:text-red-400">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600 dark:text-gray-400">Empats:</span>
+                                <span id="scoreDraw" class="font-bold text-gray-600 dark:text-gray-400">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="resetGame()"
+                        class="w-full mt-4 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors font-semibold">
+                        Nova Partida
+                    </button>
+                </div>
+            </div>
+
+            <!-- Game Board -->
+            <div class="lg:col-span-2">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
+                    <div id="board" class="grid grid-cols-3 gap-4 max-w-md mx-auto">
+                        <!-- Cells will be generated by JavaScript -->
+                    </div>
+
+                    <div id="gameMessage" class="mt-8 text-center">
+                        <p class="text-xl font-bold text-gray-700 dark:text-gray-300"></p>
+                    </div>
+                </div>
+
+                <!-- Instructions -->
+                <div class="mt-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Com jugar</h3>
+                    <ol class="list-decimal list-inside space-y-2 text-gray-600 dark:text-gray-400">
+                        <li>Un jugador copia el seu ID i l'envia a l'altre jugador</li>
+                        <li>L'altre jugador introdueix aquest ID i fa clic a "Unir-se"</li>
+                        <li>El primer jugador connectat serà X i començarà</li>
+                        <li>Feu clic a les caselles per col·locar la vostra marca</li>
+                        <li>El primer que faci tres en ratlla guanya!</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game state
+        let peer = null;
+        let connection = null;
+        let mySymbol = null;
+        let currentPlayer = 'X';
+        let board = ['', '', '', '', '', '', '', '', ''];
+        let gameActive = false;
+        let isHost = false;
+        let scores = { X: 0, O: 0, draw: 0 };
+
+        // Winning combinations
+        const winningCombinations = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+            [0, 4, 8], [2, 4, 6]             // Diagonals
+        ];
+
+        // Initialize PeerJS
+        function initializePeer() {
+            peer = new Peer();
+
+            peer.on('open', (id) => {
+                document.getElementById('myId').value = id;
+                updateStatus('Esperant connexió. Comparteix el teu ID!', 'info');
+            });
+
+            peer.on('connection', (conn) => {
+                if (connection) {
+                    conn.close();
+                    return;
+                }
+
+                connection = conn;
+                isHost = true;
+                mySymbol = 'X';
+                setupConnection();
+                updateStatus('Connectat! Tu ets X i comences.', 'success');
+                document.getElementById('yourSymbol').textContent = '❌';
+                gameActive = true;
+                updateGameStatus();
+            });
+
+            peer.on('error', (err) => {
+                console.error('Peer error:', err);
+                updateStatus('Error de connexió: ' + err.type, 'error');
+            });
+        }
+
+        // Connect to peer
+        function connectToPeer() {
+            const friendId = document.getElementById('friendId').value.trim();
+            if (!friendId) {
+                alert('Si us plau, introdueix un ID vàlid');
+                return;
+            }
+
+            if (connection) {
+                updateStatus('Ja estàs connectat!', 'warning');
+                return;
+            }
+
+            connection = peer.connect(friendId);
+            isHost = false;
+            mySymbol = 'O';
+
+            connection.on('open', () => {
+                setupConnection();
+                updateStatus('Connectat! Tu ets O i esperes el teu torn.', 'success');
+                document.getElementById('yourSymbol').textContent = '⭕';
+                gameActive = true;
+                updateGameStatus();
+
+                // Send initial sync
+                connection.send({
+                    type: 'sync',
+                    board: board,
+                    currentPlayer: currentPlayer,
+                    scores: scores
+                });
+            });
+
+            connection.on('error', (err) => {
+                console.error('Connection error:', err);
+                updateStatus('Error connectant amb l\'amic', 'error');
+            });
+        }
+
+        // Setup connection handlers
+        function setupConnection() {
+            connection.on('data', (data) => {
+                if (data.type === 'move') {
+                    board = data.board;
+                    currentPlayer = data.currentPlayer;
+                    renderBoard();
+                    updateGameStatus();
+                    checkWinner();
+                } else if (data.type === 'reset') {
+                    board = data.board;
+                    currentPlayer = data.currentPlayer;
+                    gameActive = true;
+                    renderBoard();
+                    updateGameStatus();
+                    document.getElementById('gameMessage').querySelector('p').textContent = '';
+                    document.querySelectorAll('.cell').forEach(cell => cell.classList.remove('winning-line'));
+                } else if (data.type === 'sync') {
+                    board = data.board;
+                    currentPlayer = data.currentPlayer;
+                    scores = data.scores;
+                    renderBoard();
+                    updateGameStatus();
+                    updateScoreDisplay();
+                }
+            });
+
+            connection.on('close', () => {
+                updateStatus('Connexió perduda', 'error');
+                gameActive = false;
+                connection = null;
+            });
+        }
+
+        // Create board
+        function createBoard() {
+            const boardElement = document.getElementById('board');
+            boardElement.innerHTML = '';
+
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'cell bg-gray-50 dark:bg-gray-700 rounded-xl h-24 md:h-32 flex items-center justify-center text-4xl md:text-6xl font-bold cursor-pointer border-2 border-gray-200 dark:border-gray-600';
+                cell.dataset.index = i;
+                cell.onclick = () => makeMove(i);
+                boardElement.appendChild(cell);
+            }
+        }
+
+        // Render board
+        function renderBoard() {
+            const cells = document.querySelectorAll('.cell');
+            cells.forEach((cell, index) => {
+                const value = board[index];
+                cell.textContent = value === 'X' ? '❌' : value === 'O' ? '⭕' : '';
+
+                if (value) {
+                    cell.classList.add('occupied');
+                    cell.classList.remove('hover:bg-indigo-50');
+                } else {
+                    cell.classList.remove('occupied');
+                }
+            });
+        }
+
+        // Make a move
+        function makeMove(index) {
+            if (!gameActive) {
+                alert('Esperant connexió o el joc ha acabat!');
+                return;
+            }
+
+            if (currentPlayer !== mySymbol) {
+                alert('No és el teu torn!');
+                return;
+            }
+
+            if (board[index] !== '') {
+                return;
+            }
+
+            board[index] = currentPlayer;
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+
+            renderBoard();
+            updateGameStatus();
+
+            // Send move to peer
+            if (connection && connection.open) {
+                connection.send({
+                    type: 'move',
+                    board: board,
+                    currentPlayer: currentPlayer
+                });
+            }
+
+            checkWinner();
+        }
+
+        // Check for winner
+        function checkWinner() {
+            let winner = null;
+            let winningCombo = null;
+
+            for (let combo of winningCombinations) {
+                const [a, b, c] = combo;
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                    winner = board[a];
+                    winningCombo = combo;
+                    break;
+                }
+            }
+
+            if (winner) {
+                gameActive = false;
+                scores[winner]++;
+                updateScoreDisplay();
+
+                // Highlight winning cells
+                const cells = document.querySelectorAll('.cell');
+                winningCombo.forEach(index => {
+                    cells[index].classList.add('winning-line');
+                });
+
+                const message = winner === mySymbol ? '🎉 Has guanyat!' : '😞 Has perdut!';
+                document.getElementById('gameMessage').querySelector('p').textContent = message;
+                return;
+            }
+
+            // Check for draw
+            if (!board.includes('')) {
+                gameActive = false;
+                scores.draw++;
+                updateScoreDisplay();
+                document.getElementById('gameMessage').querySelector('p').textContent = '🤝 Empat!';
+            }
+        }
+
+        // Reset game
+        function resetGame() {
+            board = ['', '', '', '', '', '', '', '', ''];
+            currentPlayer = 'X';
+            gameActive = connection && connection.open;
+
+            renderBoard();
+            updateGameStatus();
+            document.getElementById('gameMessage').querySelector('p').textContent = '';
+
+            // Remove winning highlights
+            document.querySelectorAll('.cell').forEach(cell => {
+                cell.classList.remove('winning-line');
+            });
+
+            // Notify peer
+            if (connection && connection.open) {
+                connection.send({
+                    type: 'reset',
+                    board: board,
+                    currentPlayer: currentPlayer
+                });
+            }
+        }
+
+        // Update game status
+        function updateGameStatus() {
+            document.getElementById('currentTurn').textContent = currentPlayer === 'X' ? '❌' : '⭕';
+
+            if (!gameActive && !connection) {
+                document.getElementById('gameStatus').textContent = 'Esperant connexió';
+            } else if (!gameActive) {
+                document.getElementById('gameStatus').textContent = 'Joc acabat';
+            } else if (currentPlayer === mySymbol) {
+                document.getElementById('gameStatus').textContent = '🎮 El teu torn!';
+            } else {
+                document.getElementById('gameStatus').textContent = '⏳ Esperant rival...';
+            }
+        }
+
+        // Update score display
+        function updateScoreDisplay() {
+            document.getElementById('scoreX').textContent = scores.X;
+            document.getElementById('scoreO').textContent = scores.O;
+            document.getElementById('scoreDraw').textContent = scores.draw;
+        }
+
+        // Update status message
+        function updateStatus(message, type) {
+            const statusEl = document.getElementById('statusMessage');
+            statusEl.textContent = message;
+
+            statusEl.className = 'text-sm text-center p-3 rounded-lg ';
+            if (type === 'success') {
+                statusEl.className += 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200';
+            } else if (type === 'error') {
+                statusEl.className += 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200';
+            } else if (type === 'warning') {
+                statusEl.className += 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200';
+            } else {
+                statusEl.className += 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200';
+            }
+        }
+
+        // Copy ID to clipboard
+        function copyMyId() {
+            const myId = document.getElementById('myId').value;
+            if (!myId || myId === 'Generant ID...') {
+                alert('Encara no tens un ID');
+                return;
+            }
+
+            navigator.clipboard.writeText(myId).then(() => {
+                alert('ID copiat al porta-retalls!');
+            }).catch(err => {
+                console.error('Error copying:', err);
+                alert('Error copiant l\'ID');
+            });
+        }
+
+        // Initialize game
+        createBoard();
+        initializePeer();
+    </script>
+
+</body>
+</html>
