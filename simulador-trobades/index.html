@@ -552,6 +552,10 @@
               <span class="flex items-center space-x-1"><span class="w-2 h-2 rounded-full bg-amber-500"></span> <span>5-7.5 En procés</span></span>
               <span class="flex items-center space-x-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> <span>&gt; 7.5 Sòlid</span></span>
             </div>
+
+            <p class="text-[11px] leading-snug text-amber-800 bg-amber-50 border border-amber-200 rounded-xl p-2.5">
+              <strong>⚠️ Avís:</strong> Les puntuacions i el dictamen els genera automàticament un model d'IA a partir de la transcripció. Tenen caràcter orientatiu i formatiu: poden variar entre execucions de la mateixa entrevista i no s'han de fer servir com a qualificació.
+            </p>
           </div>
 
           <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-3">
@@ -1644,6 +1648,7 @@ On X, Y, Z, W, K són les notes reals (0-10) que reflecteixen la competència de
               .meta-label { background-color: #f1f5f9; font-weight: bold; width: 25%; color: #334155; }
               p { margin: 4pt 0 8pt 0; }
               ul { margin-top: 4pt; margin-bottom: 8pt; }
+              .avis { border: 1pt solid #f59e0b; background-color: #fffbeb; color: #78350f; padding: 6pt 8pt; font-size: 9.5pt; margin-bottom: 16pt; }
             </style>
           </head>
           <body>
@@ -1670,6 +1675,8 @@ On X, Y, Z, W, K són les notes reals (0-10) que reflecteixen la competència de
                 <td><strong>${scores.average} / 10</strong></td>
               </tr>
             </table>
+
+            <p class="avis"><strong>Avís:</strong> Les puntuacions i el dictamen els genera automàticament un model d'IA a partir de la transcripció. Tenen caràcter orientatiu i formatiu: poden variar entre execucions de la mateixa entrevista i no s'han de fer servir com a qualificació.</p>
 
             <div class="content-body">
               ${feedbackHtml}
