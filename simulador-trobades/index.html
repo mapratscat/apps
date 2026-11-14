@@ -1,0 +1,2421 @@
+<!DOCTYPE html>
+<html lang="ca"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador Universal de Trobades Professionals i Feedback Formatiu</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.relative{position:relative}.sticky{position:sticky}.top-0{top:0px}.z-10{z-index:10}.z-30{z-index:30}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:0.25rem}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.ml-1{margin-left:0.25rem}.mr-1\.5{margin-right:0.375rem}.mt-1{margin-top:0.25rem}.mt-8{margin-top:2rem}.line-clamp-2{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-10{height:2.5rem}.h-16{height:4rem}.h-2{height:0.5rem}.h-3{height:0.75rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-6{height:1.5rem}.h-\[calc\(100vh-6\.5rem\)\]{height:calc(100vh - 6.5rem)}.h-full{height:100%}.min-h-0{min-height:0px}.min-h-screen{min-height:100vh}.w-10{width:2.5rem}.w-2{width:0.5rem}.w-3{width:0.75rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-full{width:100%}.max-w-3xl{max-width:48rem}.max-w-7xl{max-width:80rem}.max-w-none{max-width:none}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}@keyframes bounce{0%, 100%{transform:translateY(-25%);animation-timing-function:cubic-bezier(0.8,0,1,1)}50%{transform:none;animation-timing-function:cubic-bezier(0,0,0.2,1)}}.animate-bounce{animation:bounce 1s infinite}@keyframes ping{75%, 100%{transform:scale(2);opacity:0}}.animate-ping{animation:ping 1s cubic-bezier(0, 0, 0.2, 1) infinite}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-0{gap:0px}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.gap-2\.5{gap:0.625rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.space-x-1 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.25rem * var(--tw-space-x-reverse));margin-left:calc(0.25rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-1\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.375rem * var(--tw-space-x-reverse));margin-left:calc(0.375rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.5rem * var(--tw-space-x-reverse));margin-left:calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-3 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.75rem * var(--tw-space-x-reverse));margin-left:calc(0.75rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.space-y-1\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.375rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.375rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.self-start{align-self:flex-start}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rounded{border-radius:0.25rem}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-md{border-radius:0.375rem}.rounded-xl{border-radius:0.75rem}.rounded-b-2xl{border-bottom-right-radius:1rem;border-bottom-left-radius:1rem}.rounded-t-2xl{border-top-left-radius:1rem;border-top-right-radius:1rem}.border{border-width:1px}.border-x{border-left-width:1px;border-right-width:1px}.border-b{border-bottom-width:1px}.border-b-2{border-bottom-width:2px}.border-t{border-top-width:1px}.border-dashed{border-style:dashed}.border-amber-200{--tw-border-opacity:1;border-color:rgb(253 230 138 / var(--tw-border-opacity, 1))}.border-brand-100{--tw-border-opacity:1;border-color:rgb(224 242 254 / var(--tw-border-opacity, 1))}.border-brand-500{--tw-border-opacity:1;border-color:rgb(14 165 233 / var(--tw-border-opacity, 1))}.border-brand-600{--tw-border-opacity:1;border-color:rgb(2 132 199 / var(--tw-border-opacity, 1))}.border-emerald-200{--tw-border-opacity:1;border-color:rgb(167 243 208 / var(--tw-border-opacity, 1))}.border-indigo-100{--tw-border-opacity:1;border-color:rgb(224 231 255 / var(--tw-border-opacity, 1))}.border-indigo-200{--tw-border-opacity:1;border-color:rgb(199 210 254 / var(--tw-border-opacity, 1))}.border-slate-100{--tw-border-opacity:1;border-color:rgb(241 245 249 / var(--tw-border-opacity, 1))}.border-slate-200{--tw-border-opacity:1;border-color:rgb(226 232 240 / var(--tw-border-opacity, 1))}.border-slate-300{--tw-border-opacity:1;border-color:rgb(203 213 225 / var(--tw-border-opacity, 1))}.border-transparent{border-color:transparent}.border-white\/20{border-color:rgb(255 255 255 / 0.2)}.bg-amber-100{--tw-bg-opacity:1;background-color:rgb(254 243 199 / var(--tw-bg-opacity, 1))}.bg-amber-50{--tw-bg-opacity:1;background-color:rgb(255 251 235 / var(--tw-bg-opacity, 1))}.bg-amber-50\/70{background-color:rgb(255 251 235 / 0.7)}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(245 158 11 / var(--tw-bg-opacity, 1))}.bg-amber-600{--tw-bg-opacity:1;background-color:rgb(217 119 6 / var(--tw-bg-opacity, 1))}.bg-brand-100{--tw-bg-opacity:1;background-color:rgb(224 242 254 / var(--tw-bg-opacity, 1))}.bg-brand-50{--tw-bg-opacity:1;background-color:rgb(240 249 255 / var(--tw-bg-opacity, 1))}.bg-brand-50\/70{background-color:rgb(240 249 255 / 0.7)}.bg-brand-500{--tw-bg-opacity:1;background-color:rgb(14 165 233 / var(--tw-bg-opacity, 1))}.bg-brand-500\/30{background-color:rgb(14 165 233 / 0.3)}.bg-brand-600{--tw-bg-opacity:1;background-color:rgb(2 132 199 / var(--tw-bg-opacity, 1))}.bg-emerald-100{--tw-bg-opacity:1;background-color:rgb(209 250 229 / var(--tw-bg-opacity, 1))}.bg-emerald-50{--tw-bg-opacity:1;background-color:rgb(236 253 245 / var(--tw-bg-opacity, 1))}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.bg-indigo-100{--tw-bg-opacity:1;background-color:rgb(224 231 255 / var(--tw-bg-opacity, 1))}.bg-indigo-50{--tw-bg-opacity:1;background-color:rgb(238 242 255 / var(--tw-bg-opacity, 1))}.bg-indigo-50\/60{background-color:rgb(238 242 255 / 0.6)}.bg-indigo-600{--tw-bg-opacity:1;background-color:rgb(79 70 229 / var(--tw-bg-opacity, 1))}.bg-purple-100{--tw-bg-opacity:1;background-color:rgb(243 232 255 / var(--tw-bg-opacity, 1))}.bg-red-500{--tw-bg-opacity:1;background-color:rgb(239 68 68 / var(--tw-bg-opacity, 1))}.bg-slate-100{--tw-bg-opacity:1;background-color:rgb(241 245 249 / var(--tw-bg-opacity, 1))}.bg-slate-50{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.bg-slate-50\/50{background-color:rgb(248 250 252 / 0.5)}.bg-slate-50\/80{background-color:rgb(248 250 252 / 0.8)}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white\/10{background-color:rgb(255 255 255 / 0.1)}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.bg-gradient-to-tr{background-image:linear-gradient(to top right, var(--tw-gradient-stops))}.from-brand-600{--tw-gradient-from:#0284c7 var(--tw-gradient-from-position);--tw-gradient-to:rgb(2 132 199 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-brand-900{--tw-gradient-from:#0c4a6e var(--tw-gradient-from-position);--tw-gradient-to:rgb(12 74 110 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-emerald-600{--tw-gradient-from:#059669 var(--tw-gradient-from-position);--tw-gradient-to:rgb(5 150 105 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-indigo-900{--tw-gradient-from:#312e81 var(--tw-gradient-from-position);--tw-gradient-to:rgb(49 46 129 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-purple-600{--tw-gradient-from:#9333ea var(--tw-gradient-from-position);--tw-gradient-to:rgb(147 51 234 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-indigo-950{--tw-gradient-to:rgb(30 27 75 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #1e1b4b var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-indigo-600{--tw-gradient-to:#4f46e5 var(--tw-gradient-to-position)}.to-purple-900{--tw-gradient-to:#581c87 var(--tw-gradient-to-position)}.to-slate-900{--tw-gradient-to:#0f172a var(--tw-gradient-to-position)}.to-teal-600{--tw-gradient-to:#0d9488 var(--tw-gradient-to-position)}.p-2\.5{padding:0.625rem}.p-3{padding:0.75rem}.p-3\.5{padding:0.875rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.px-1{padding-left:0.25rem;padding-right:0.25rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-3\.5{padding-left:0.875rem;padding-right:0.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-3\.5{padding-top:0.875rem;padding-bottom:0.875rem}.py-4{padding-top:1rem;padding-bottom:1rem}.pb-1\.5{padding-bottom:0.375rem}.pb-2{padding-bottom:0.5rem}.pb-3{padding-bottom:0.75rem}.pb-4{padding-bottom:1rem}.pt-1{padding-top:0.25rem}.pt-2{padding-top:0.5rem}.pt-3{padding-top:0.75rem}.pt-4{padding-top:1rem}.text-left{text-align:left}.text-center{text-align:center}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.font-sans{font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"}.font-serif{font-family:ui-serif, Georgia, Cambria, "Times New Roman", Times, serif}.text-2xl{font-size:1.5rem;line-height:2rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.normal-case{text-transform:none}.italic{font-style:italic}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-tight{letter-spacing:-0.025em}.tracking-wider{letter-spacing:0.05em}.text-amber-700{--tw-text-opacity:1;color:rgb(180 83 9 / var(--tw-text-opacity, 1))}.text-amber-800{--tw-text-opacity:1;color:rgb(146 64 14 / var(--tw-text-opacity, 1))}.text-brand-600{--tw-text-opacity:1;color:rgb(2 132 199 / var(--tw-text-opacity, 1))}.text-brand-700{--tw-text-opacity:1;color:rgb(3 105 161 / var(--tw-text-opacity, 1))}.text-brand-800{--tw-text-opacity:1;color:rgb(7 89 133 / var(--tw-text-opacity, 1))}.text-emerald-700{--tw-text-opacity:1;color:rgb(4 120 87 / var(--tw-text-opacity, 1))}.text-emerald-800{--tw-text-opacity:1;color:rgb(6 95 70 / var(--tw-text-opacity, 1))}.text-indigo-200{--tw-text-opacity:1;color:rgb(199 210 254 / var(--tw-text-opacity, 1))}.text-indigo-300{--tw-text-opacity:1;color:rgb(165 180 252 / var(--tw-text-opacity, 1))}.text-indigo-600{--tw-text-opacity:1;color:rgb(79 70 229 / var(--tw-text-opacity, 1))}.text-indigo-700{--tw-text-opacity:1;color:rgb(67 56 202 / var(--tw-text-opacity, 1))}.text-indigo-800{--tw-text-opacity:1;color:rgb(55 48 163 / var(--tw-text-opacity, 1))}.text-indigo-900{--tw-text-opacity:1;color:rgb(49 46 129 / var(--tw-text-opacity, 1))}.text-indigo-950{--tw-text-opacity:1;color:rgb(30 27 75 / var(--tw-text-opacity, 1))}.text-purple-700{--tw-text-opacity:1;color:rgb(126 34 206 / var(--tw-text-opacity, 1))}.text-purple-800{--tw-text-opacity:1;color:rgb(107 33 168 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85 / var(--tw-text-opacity, 1))}.text-slate-800{--tw-text-opacity:1;color:rgb(30 41 59 / var(--tw-text-opacity, 1))}.text-slate-900{--tw-text-opacity:1;color:rgb(15 23 42 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.placeholder-slate-400::placeholder{--tw-placeholder-opacity:1;color:rgb(148 163 184 / var(--tw-placeholder-opacity, 1))}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.hover\:border-slate-300:hover{--tw-border-opacity:1;border-color:rgb(203 213 225 / var(--tw-border-opacity, 1))}.hover\:bg-amber-700:hover{--tw-bg-opacity:1;background-color:rgb(180 83 9 / var(--tw-bg-opacity, 1))}.hover\:bg-brand-700:hover{--tw-bg-opacity:1;background-color:rgb(3 105 161 / var(--tw-bg-opacity, 1))}.hover\:bg-indigo-700:hover{--tw-bg-opacity:1;background-color:rgb(67 56 202 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-100:hover{--tw-bg-opacity:1;background-color:rgb(241 245 249 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-200:hover{--tw-bg-opacity:1;background-color:rgb(226 232 240 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-50:hover{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-900:hover{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.hover\:bg-white\/20:hover{background-color:rgb(255 255 255 / 0.2)}.hover\:from-brand-700:hover{--tw-gradient-from:#0369a1 var(--tw-gradient-from-position);--tw-gradient-to:rgb(3 105 161 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.hover\:from-emerald-700:hover{--tw-gradient-from:#047857 var(--tw-gradient-from-position);--tw-gradient-to:rgb(4 120 87 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.hover\:from-purple-700:hover{--tw-gradient-from:#7e22ce var(--tw-gradient-from-position);--tw-gradient-to:rgb(126 34 206 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.hover\:to-indigo-700:hover{--tw-gradient-to:#4338ca var(--tw-gradient-to-position)}.hover\:to-teal-700:hover{--tw-gradient-to:#0f766e var(--tw-gradient-to-position)}.hover\:text-brand-800:hover{--tw-text-opacity:1;color:rgb(7 89 133 / var(--tw-text-opacity, 1))}.hover\:text-slate-600:hover{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.hover\:text-slate-800:hover{--tw-text-opacity:1;color:rgb(30 41 59 / var(--tw-text-opacity, 1))}.hover\:text-slate-900:hover{--tw-text-opacity:1;color:rgb(15 23 42 / var(--tw-text-opacity, 1))}.focus\:ring-1:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-brand-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(14 165 233 / var(--tw-ring-opacity, 1))}.focus\:ring-indigo-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(99 102 241 / var(--tw-ring-opacity, 1))}@media (min-width: 640px){.sm\:inline-flex{display:inline-flex}.sm\:h-5{height:1.25rem}.sm\:w-5{width:1.25rem}.sm\:w-auto{width:auto}.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.sm\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.sm\:flex-row{flex-direction:row}.sm\:items-center{align-items:center}.sm\:space-x-3 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.75rem * var(--tw-space-x-reverse));margin-left:calc(0.75rem * calc(1 - var(--tw-space-x-reverse)))}.sm\:self-auto{align-self:auto}.sm\:p-3{padding:0.75rem}.sm\:p-4{padding:1rem}.sm\:p-6{padding:1.5rem}.sm\:p-8{padding:2rem}.sm\:px-4{padding-left:1rem;padding-right:1rem}.sm\:px-5{padding-left:1.25rem;padding-right:1.25rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:py-3{padding-top:0.75rem;padding-bottom:0.75rem}.sm\:text-2xl{font-size:1.5rem;line-height:2rem}.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}.sm\:text-base{font-size:1rem;line-height:1.5rem}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}.sm\:text-sm{font-size:0.875rem;line-height:1.25rem}}@media (min-width: 768px){.md\:inline{display:inline}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:items-center{align-items:center}}@media (min-width: 1024px){.lg\:col-span-4{grid-column:span 4 / span 4}.lg\:col-span-5{grid-column:span 5 / span 5}.lg\:col-span-7{grid-column:span 7 / span 7}.lg\:col-span-8{grid-column:span 8 / span 8}.lg\:grid-cols-12{grid-template-columns:repeat(12, minmax(0, 1fr))}.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:border-b-0{border-bottom-width:0px}.lg\:border-r{border-right-width:1px}.lg\:px-8{padding-left:2rem;padding-right:2rem}}</style></head>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col antialiased">
+
+  <!-- CAPÇALERA GLOBAL -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="UIController.goToView('setup')">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-600 flex items-center justify-center text-white font-black text-xl shadow-sm">
+          S
+        </div>
+        <div>
+          <h1 class="font-bold text-base sm:text-lg leading-tight text-slate-900">Simulador Universal</h1>
+          <p class="text-[11px] text-slate-500 font-medium">Trobades Professionals &amp; Feedback Formatiu</p>
+        </div>
+      </div>
+
+      <!-- Indicador d'estat a la barra superior -->
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <div id="header-status-badge" class="hidden sm:inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
+          <span id="header-status-text">Configuració</span>
+        </div>
+
+        <button onclick="UIController.exportCurrentHTMLFile()" title="Descarrega aquest simulador en un únic fitxer .html autònom" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-3 py-1.5 rounded-lg border border-slate-300 transition-colors flex items-center space-x-1.5">
+          <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          <span class="hidden md:inline">Descarregar fitxer .html</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTINGUT PRINCIPAL DINÀMIC -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 flex flex-col">
+
+    <!-- ========================================================================= -->
+    <!-- PANTALLA 1: CONFIGURACIÓ INICIAL I CÀRREGA (SETUP VIEW)                   -->
+    <!-- ========================================================================= -->
+    <div id="view-setup" class="space-y-6 flex-1 flex flex-col justify-center">
+
+      <!-- BANNER D'INSTRUCCIÓ I DESCÀRREGA DE PLANTILLES BUIDES -->
+      <div class="bg-gradient-to-r from-brand-900 via-indigo-950 to-slate-900 rounded-2xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
+        <div class="relative z-10 max-w-3xl space-y-3">
+          <span class="inline-block px-3 py-1 bg-brand-500/30 border border-brand-400/40 rounded-full text-brand-200 text-xs font-semibold uppercase tracking-wider">
+            Arquitectura MOD-01 a MOD-06
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Simulador d'Entrevistes Clíniques, Educatives i Laborals</h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            Plataforma universal basada en estàndards declaratius JSON. Personalitza o utilitza els nostres exemples integrats amb avaluació automàtica per rúbrica i copilot supervisor en temps real.
+          </p>
+
+          <!-- 1. DESCÀRREGA DE PLANTILLES BUIDES (.JSON) -->
+          <div class="pt-3 flex flex-wrap gap-3 items-center">
+            <span class="text-xs text-slate-400 font-medium block w-full sm:w-auto">Descarregar plantilles docents buides:</span>
+            <button onclick="TemplateManager.downloadCaseTemplate()" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center space-x-2 shadow-xs backdrop-blur-xs">
+              <svg class="w-4 h-4 text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              <span>Descarregar Plantilla de Cas (.json)</span>
+            </button>
+            <button onclick="TemplateManager.downloadFrameworkTemplate()" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center space-x-2 shadow-xs backdrop-blur-xs">
+              <svg class="w-4 h-4 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              <span>Descarregar Plantilla de Marc Teòric (.json)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓ EN 2 COLUMNES: CAS & TEORIA vs CONFIGURACIÓ DE L'ALUMNE I IA -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- COLUMNA ESQUERRA: SELECCIÓ DE CAS I MARC TEÒRIC (7 cols) -->
+        <div class="lg:col-span-7 space-y-6">
+
+          <!-- 2. SELECTOR DE CASOS DE PROVA PREDEFINITS -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 class="font-bold text-slate-900 text-sm sm:text-base flex items-center space-x-2">
+                <span class="w-6 h-6 rounded-lg bg-brand-100 text-brand-700 flex items-center justify-center text-xs font-bold">1</span>
+                <span>Tria un Cas de Prova o puja fitxers personalitzats</span>
+              </h3>
+              <span class="text-xs text-brand-600 font-semibold bg-brand-50 px-2.5 py-0.5 rounded-full border border-brand-100">MOD-01 &amp; 02</span>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 mb-2">Exemples preparats per iniciar a l'instant:</label>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5" id="presets-container">
+                <button onclick="CaseLoader.loadPreset('clinic')" id="btn-preset-clinic" class="preset-btn p-3 rounded-xl border text-left transition-all relative border-brand-500 bg-brand-50/70 shadow-xs">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-purple-100 text-purple-700">Clínic</span>
+                    <span class="text-xs text-brand-600 font-bold">✓</span>
+                  </div>
+                  <h4 class="font-bold text-xs text-slate-900 leading-tight">Clara (28 anys)</h4>
+                  <p class="text-[11px] text-slate-500 mt-1 line-clamp-2">Avaluació Integradora de la Personalitat (TPE)</p>
+                </button>
+
+                <button onclick="CaseLoader.loadPreset('educatiu')" id="btn-preset-educatiu" class="preset-btn p-3 rounded-xl border border-slate-200 hover:border-slate-300 bg-white text-left transition-all">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-amber-100 text-amber-700">Educatiu</span>
+                  </div>
+                  <h4 class="font-bold text-xs text-slate-900 leading-tight">Mediació d'Aula</h4>
+                  <p class="text-[11px] text-slate-500 mt-1 line-clamp-2">Justícia Restaurativa (Marc, Laia i Tutor)</p>
+                </button>
+
+                <button onclick="CaseLoader.loadPreset('laboral')" id="btn-preset-laboral" class="preset-btn p-3 rounded-xl border border-slate-200 hover:border-slate-300 bg-white text-left transition-all">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-700">Laboral</span>
+                  </div>
+                  <h4 class="font-bold text-xs text-slate-900 leading-tight">Conflicte d'Equip</h4>
+                  <p class="text-[11px] text-slate-500 mt-1 line-clamp-2">CNV i Negociació Harvard (Elena &amp; Bernat)</p>
+                </button>
+              </div>
+            </div>
+
+            <!-- PUJAR FITXERS PERSONALITZATS (.JSON) -->
+            <div class="pt-3 border-t border-slate-100">
+              <label class="block text-xs font-semibold text-slate-700 mb-2">O puja els teus propis fitxers JSON personalitzats:</label>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="border border-dashed border-slate-300 rounded-xl p-3 text-center hover:bg-slate-50 transition-colors">
+                  <p class="text-xs font-semibold text-slate-700 mb-1">Fitxa de Cas (.json)</p>
+                  <label class="cursor-pointer inline-block bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs px-3 py-1.5 rounded-lg border border-slate-300 font-medium">
+                    Seleccionar Fitxer
+                    <input type="file" id="file-case" accept=".json" class="hidden" onchange="CaseLoader.handleCaseFileUpload(event)">
+                  </label>
+                  <p id="file-case-status" class="text-[11px] text-slate-500 mt-1 truncate">Carregat: Exemple CLINIC</p>
+                </div>
+
+                <div class="border border-dashed border-slate-300 rounded-xl p-3 text-center hover:bg-slate-50 transition-colors">
+                  <p class="text-xs font-semibold text-slate-700 mb-1">Marc Teòric (.json)</p>
+                  <label class="cursor-pointer inline-block bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs px-3 py-1.5 rounded-lg border border-slate-300 font-medium">
+                    Seleccionar Fitxer
+                    <input type="file" id="file-framework" accept=".json" class="hidden" onchange="CaseLoader.handleFrameworkFileUpload(event)">
+                  </label>
+                  <p id="file-framework-status" class="text-[11px] text-slate-500 mt-1 truncate">Carregat: Exemple CLINIC</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- TARGETA DE RESUM DEL CAS CARREGAT -->
+            <div id="case-preview-card" class="bg-slate-50 rounded-xl p-4 border border-slate-200 text-xs space-y-2">
+              <div class="flex items-center justify-between">
+                <span id="preview-ambit-badge" class="px-2 py-0.5 rounded font-bold uppercase text-[10px] bg-purple-100 text-purple-800">CLINIC</span>
+                <span id="preview-characters-count" class="text-slate-500 font-medium">1 personatges</span>
+              </div>
+              <h4 id="preview-case-title" class="font-bold text-slate-900 text-sm">Entrevista inicial d'avaluació amb Clara (28 anys)</h4>
+              <p id="preview-framework-name" class="text-slate-600 font-medium">Marc: <span class="font-semibold text-slate-800">Avaluació Integradora de la Personalitat</span></p>
+              <div id="preview-characters-tags" class="flex flex-wrap gap-1.5 pt-1"><span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-purple-100 text-purple-800">Clara (CLA)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUMNA DRETA: CONFIGURACIÓ DE L'ALUMNE I MULTI-IA (5 cols) -->
+        <div class="lg:col-span-5 space-y-6">
+
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 class="font-bold text-slate-900 text-sm sm:text-base flex items-center space-x-2">
+                <span class="w-6 h-6 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold">2</span>
+                <span>Estudiant &amp; Proveïdor d'IA</span>
+              </h3>
+              <span class="text-xs text-indigo-600 font-semibold bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-100">MOD-04</span>
+            </div>
+
+            <!-- NOM DE L'ESTUDIANT -->
+            <div>
+              <label for="student-name" class="block text-xs font-bold text-slate-700 mb-1">Nom i Cognom de l'Estudiant:</label>
+              <input type="text" id="student-name" placeholder="Ex: Maria Torres" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm focus:outline-hidden focus:ring-2 focus:ring-brand-500 font-medium text-slate-900">
+            </div>
+
+            <!-- SELECTOR DE PROVEÏDOR D'IA -->
+            <div>
+              <label for="ai-provider" class="block text-xs font-bold text-slate-700 mb-1">Proveïdor d'Intel·ligència Artificial:</label>
+              <select id="ai-provider" onchange="AIProviderManager.onProviderChanged()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm focus:outline-hidden focus:ring-2 focus:ring-brand-500 font-semibold text-slate-900">
+                <option value="gemini" selected="">Google Gemini (Recomanat - Natiu Web)</option>
+                <option value="openai">OpenAI ChatGPT (Natiu Web)</option>
+                <option value="claude">Anthropic Claude (Natiu Web)</option>
+                <option value="mistral">Mistral AI</option>
+              </select>
+            </div>
+
+            <!-- SELECTOR DE MODEL -->
+            <div>
+              <label for="ai-model" class="block text-xs font-bold text-slate-700 mb-1">Model d'IA:</label>
+              <select id="ai-model" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:outline-hidden focus:ring-2 focus:ring-brand-500 text-slate-800"></select>
+            </div>
+
+            <!-- API KEY -->
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <label for="api-key" class="text-xs font-bold text-slate-700">Clau d'API (API Key):</label>
+                <span class="flex items-center gap-3">
+                  <button type="button" onclick="AIProviderManager.toggleKeyVisibility()" class="text-[11px] text-brand-600 hover:text-brand-800 font-medium">Mostrar/Amagar</button>
+                  <button type="button" onclick="AIProviderManager.forgetKey()" class="text-[11px] text-red-600 hover:text-red-800 font-medium">Esborrar clau</button>
+                </span>
+              </div>
+              <input type="password" id="api-key" placeholder="Introdueix la teva API Key..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-mono focus:outline-hidden focus:ring-2 focus:ring-brand-500 text-slate-900">
+              <p class="text-[11px] text-slate-500 mt-1">
+                🔒 Es desa només en aquest navegador (<code class="bg-slate-100 px-1 py-0.5 rounded text-[10px]">localStorage</code>), per a cada proveïdor. <strong>En un ordinador compartit, prem «Esborrar clau» en acabar.</strong> Les converses s'envien al proveïdor d'IA triat: no hi introdueixis dades reals de persones.
+              </p>
+            </div>
+
+            <!-- AVÍS PEDAGÒGIC SOBRE CORS -->
+            <div id="cors-notice" class="hidden bg-amber-50 border border-amber-200 rounded-xl p-3 text-[11px] text-amber-800">
+              <span class="font-bold">⚠️ Nota sobre CORS:</span> Els servidors de Mistral poden bloquejar les crides fetes directament des del navegador. Si falla, fes servir <strong>Google Gemini</strong>, <strong>OpenAI</strong> o <strong>Claude</strong>.
+            </div>
+
+            <!-- BOTÓ PER INICIAR BRIEFING -->
+            <div class="pt-2">
+              <button onclick="UIController.goToBriefing()" class="w-full bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 hover:to-indigo-700 text-white font-bold py-3 px-4 rounded-xl shadow-md transition-all flex items-center justify-center space-x-2 text-sm">
+                <span>Accedir al Briefing del Cas</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- PANTALLA 2: BRIEFING DEL CAS (BRIEFING VIEW)                              -->
+    <!-- ========================================================================= -->
+    <div id="view-briefing" class="hidden space-y-6 flex-1">
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-3">
+          <div>
+            <div class="flex items-center space-x-2">
+              <span id="briefing-ambit-badge" class="px-2.5 py-0.5 rounded-full text-xs font-extrabold uppercase bg-purple-100 text-purple-700">CLÍNIC</span>
+              <span class="text-xs text-slate-400">Briefing Previ a la Simulació</span>
+            </div>
+            <h2 id="briefing-title" class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">Títol del cas</h2>
+          </div>
+          <button onclick="UIController.goToView('setup')" class="self-start sm:self-auto text-xs font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg border border-slate-300 transition-colors">
+            ← Canviar Configuració
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-1.5">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center space-x-1">
+              <span>🗣️</span> <span>Demanda Manifesta</span>
+            </h4>
+            <p id="briefing-demanda" class="text-xs sm:text-sm text-slate-700 leading-relaxed"></p>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-1.5">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center space-x-1">
+              <span>📋</span> <span>Context Obert</span>
+            </h4>
+            <p id="briefing-context" class="text-xs sm:text-sm text-slate-700 leading-relaxed"></p>
+          </div>
+
+          <div class="bg-amber-50/70 border border-amber-200 rounded-xl p-4 space-y-1.5">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-amber-700 flex items-center space-x-1">
+              <span>👀</span> <span>Observació Analògica</span>
+            </h4>
+            <p id="briefing-observacio" class="text-xs sm:text-sm text-slate-800 leading-relaxed font-serif italic"></p>
+          </div>
+        </div>
+
+        <div class="space-y-3 pt-2">
+          <h3 class="font-bold text-sm text-slate-900 flex items-center space-x-2">
+            <span>👥 Personatges presents a la trobada</span>
+            <span class="text-xs font-normal text-slate-500">(Interlocutors durant la sessió)</span>
+          </h3>
+          <div id="briefing-characters-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          </div>
+        </div>
+
+        <div class="bg-indigo-50/60 border border-indigo-200 rounded-xl p-4 space-y-2">
+          <h4 class="text-xs font-bold text-indigo-900 uppercase tracking-wider flex items-center space-x-1">
+            <span>🎓 Marc Teòric Actiu:</span> <span id="briefing-school-name" class="text-indigo-800 normal-case font-extrabold ml-1"></span>
+          </h4>
+          <p id="briefing-supervisor-role" class="text-xs text-indigo-950"></p>
+          <div class="pt-2">
+            <span class="text-[11px] font-bold text-indigo-800 uppercase tracking-wider">5 Dimensions que s'avaluaran al finalitzar:</span>
+            <ul id="briefing-dimensions-list" class="mt-1 grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-indigo-900">
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-4 flex justify-end">
+          <button onclick="SimulationEngine.startSimulation()" class="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold px-8 py-3.5 rounded-xl shadow-lg transition-all flex items-center justify-center space-x-2 text-base">
+            <span>Obrir la Porta i Començar la Trobada</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- PANTALLA 3: SIMULACIÓ I XAT EN VIU (SIMULATION VIEW - MOD-05)              -->
+    <!-- ========================================================================= -->
+    <div id="view-simulation" class="hidden flex-1 flex flex-col h-[calc(100vh-6.5rem)]">
+
+      <div class="bg-white border border-slate-200 rounded-t-2xl p-3 sm:px-5 flex items-center justify-between shadow-xs shrink-0">
+        <div class="flex items-center space-x-3 truncate">
+          <span class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></span>
+          <div class="truncate">
+            <h3 id="sim-session-case-title" class="font-bold text-slate-900 text-sm truncate">Títol del cas</h3>
+            <p class="text-[11px] text-slate-500">
+              Entrevistador/a: <span id="sim-session-student" class="font-semibold text-slate-700"></span> · Model: <span id="sim-session-model" class="font-mono text-slate-600 text-[10px]"></span>
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <button onclick="SimulationEngine.confirmEndSession()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-3 sm:px-4 py-2 rounded-xl text-xs uppercase tracking-wider transition-colors shadow-xs flex items-center space-x-1.5">
+            <span>🏁</span>
+            <span>Finalitzar</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-0 border-x border-b border-slate-200 bg-white rounded-b-2xl overflow-hidden min-h-0">
+
+        <!-- COLUMNA ESQUERRA: ÀREA DE DIÀLEG I XAT (8 cols) -->
+        <div class="lg:col-span-8 flex flex-col h-full border-b lg:border-b-0 lg:border-r border-slate-200 min-h-0">
+
+          <div id="chat-messages-feed" class="flex-1 p-4 sm:p-6 overflow-y-auto space-y-4 custom-scrollbar bg-slate-50/50">
+          </div>
+
+          <div id="chat-typing-indicator" class="hidden px-6 py-2 bg-slate-50/80 border-t border-slate-100 flex items-center space-x-2 text-xs text-slate-500">
+            <div class="flex space-x-1">
+              <span class="w-2 h-2 rounded-full bg-brand-500 animate-bounce"></span>
+              <span class="w-2 h-2 rounded-full bg-brand-500 animate-bounce" style="animation-delay: 0.2s"></span>
+              <span class="w-2 h-2 rounded-full bg-brand-500 animate-bounce" style="animation-delay: 0.4s"></span>
+            </div>
+            <span id="typing-indicator-text">Els personatges estan contestant...</span>
+          </div>
+
+          <div class="bg-white border-t border-slate-200 p-3 sm:p-4 shrink-0 space-y-2">
+            
+            <div class="flex items-center space-x-2">
+              <label for="chat-target-select" class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Dirigit a:</label>
+              <select id="chat-target-select" class="bg-slate-100 border border-slate-200 rounded-lg text-xs font-semibold px-2.5 py-1 text-slate-800 focus:outline-hidden">
+                <option value="A tots / General">A tots / General</option>
+              </select>
+            </div>
+
+            <form id="chat-form" onsubmit="SimulationEngine.handleSendMessage(event)" class="flex items-center space-x-2 sm:space-x-3">
+              <input type="text" id="chat-input" placeholder="Escriu la teva intervenció o pregunta per als personatges..." required="" autocomplete="off" class="flex-1 bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 sm:py-3 text-xs sm:text-sm focus:outline-hidden focus:ring-2 focus:ring-brand-500 text-slate-900 placeholder-slate-400">
+
+              <button type="button" id="btn-optimize" onclick="SimulationEngine.handleOptimizeIntervention()" title="Transforma el teu esborrany segons el marc teòric actiu abans d'enviar-lo" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl shadow-xs transition-all shrink-0 flex items-center space-x-1.5 font-bold text-xs">
+                <span id="label-optimize-btn">✨ Reformular</span>
+              </button>
+
+              <button type="submit" id="btn-send-message" class="bg-brand-600 hover:bg-brand-700 text-white p-2.5 sm:p-3 rounded-xl shadow-xs transition-colors shrink-0 flex items-center justify-center">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                </svg>
+              </button>
+            </form>
+
+          </div>
+
+        </div>
+
+        <!-- COLUMNA DRETA: PANELL LATERAL DUAL (4 cols) -->
+        <div class="lg:col-span-4 flex flex-col h-full bg-slate-50/50 min-h-0">
+
+          <div class="flex border-b border-slate-200 bg-white shrink-0">
+            <button id="tab-case-btn" onclick="UIController.setSidebarTab('case')" class="flex-1 py-3 text-center border-b-2 border-brand-600 text-brand-600 bg-slate-50 font-bold text-xs transition-colors">
+              Fitxa del Cas
+            </button>
+            <button id="tab-copilot-btn" onclick="UIController.setSidebarTab('copilot')" class="flex-1 py-3 text-center border-b-2 border-transparent text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors font-medium text-xs flex items-center justify-center space-x-1">
+              <span>✨ Copilot IA (Docent)</span>
+            </button>
+          </div>
+
+          <div id="tab-case-content" class="flex-1 p-4 overflow-y-auto space-y-4 custom-scrollbar">
+            
+            <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-2">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Observació en directe</span>
+              <p id="sidebar-case-obs" class="text-xs text-slate-700 italic font-serif leading-relaxed"></p>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-2">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Demanda i Context</span>
+              <p id="sidebar-case-demand" class="text-xs text-slate-700 leading-relaxed"></p>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-2">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Personatges presents</span>
+              <div id="sidebar-characters-list" class="space-y-2">
+              </div>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-1">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Marc Metodològic</span>
+              <p id="sidebar-school-title" class="text-xs font-bold text-slate-800"></p>
+              <p id="sidebar-school-dimensions" class="text-[11px] text-slate-500"></p>
+            </div>
+
+          </div>
+
+          <div id="tab-copilot-content" class="hidden flex-1 p-4 overflow-y-auto space-y-4 custom-scrollbar">
+
+            <div class="bg-gradient-to-tr from-indigo-900 to-purple-900 text-white rounded-xl p-3.5 space-y-1 shadow-xs">
+              <div class="flex items-center space-x-1.5">
+                <span class="text-base">🎓</span>
+                <h4 class="font-bold text-xs uppercase tracking-wider">Supervisor Metodològic</h4>
+              </div>
+              <p id="copilot-role-desc" class="text-[11px] text-indigo-200 leading-snug"></p>
+            </div>
+
+            <div class="space-y-2">
+              <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Eines Pedagògiques en Viu</span>
+              
+              <button onclick="SimulationEngine.requestCopilotHypothesis()" id="btn-copilot-hypothesis" class="w-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between shadow-2xs">
+                <span class="flex items-center space-x-2">
+                  <span>💡</span>
+                  <span>Generar Hipòtesi de Treball</span>
+                </span>
+                <span class="text-[10px] text-slate-400">Anàlisi</span>
+              </button>
+
+              <button onclick="SimulationEngine.requestCopilotNeutrality()" id="btn-copilot-neutrality" class="w-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between shadow-2xs">
+                <span class="flex items-center space-x-2">
+                  <span>⚖️</span>
+                  <span>Avaluar la meva Neutralitat</span>
+                </span>
+                <span class="text-[10px] text-slate-400">Equidistància</span>
+              </button>
+            </div>
+
+            <div class="space-y-2 pt-2 border-t border-slate-200">
+              <label for="copilot-query-input" class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Pregunta lliure al docent:</label>
+              <div class="flex space-x-2">
+                <input type="text" id="copilot-query-input" placeholder="Ex: Com puc involucrar en Marc sense forçar-lo?" class="flex-1 bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs focus:outline-hidden focus:ring-1 focus:ring-indigo-500 text-slate-800 placeholder-slate-400">
+                <button onclick="SimulationEngine.requestCopilotQuery()" id="btn-copilot-query" class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-xl text-xs font-bold transition-colors shrink-0">
+                  Enviar
+                </button>
+              </div>
+            </div>
+
+            <div id="copilot-response-box" class="hidden bg-white border border-indigo-200 rounded-xl p-3.5 space-y-2 shadow-xs">
+              <div class="flex items-center justify-between border-b border-indigo-100 pb-1.5">
+                <span id="copilot-response-title" class="font-bold text-xs text-indigo-900 flex items-center space-x-1">
+                  <span>🎓</span> <span>Retorn del Supervisor</span>
+                </span>
+                <button onclick="document.getElementById('copilot-response-box').classList.add('hidden')" class="text-slate-400 hover:text-slate-600 text-xs">✕</button>
+              </div>
+              <div id="copilot-response-text" class="text-xs text-slate-700 leading-relaxed font-sans space-y-1"></div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- PANTALLA 4: FEEDBACK, MÈTRIQUES I EXPORTACIÓ (FEEDBACK VIEW - MOD-06)      -->
+    <!-- ========================================================================= -->
+    <div id="view-feedback" class="hidden space-y-6 flex-1">
+      
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase bg-brand-100 text-brand-800">Avaluació Finalitzada</span>
+            <span class="text-xs text-slate-400" id="feedback-date-text"></span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">Informe de Feedback Competencial i Mètriques</h2>
+          <p class="text-xs sm:text-sm text-slate-600">
+            Estudiant: <strong id="feedback-student-name"></strong> · Cas: <span id="feedback-case-title"></span>
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-2.5">
+          <button onclick="FeedbackEngine.exportWordReport()" class="bg-brand-600 hover:bg-brand-700 text-white px-3.5 py-2.5 rounded-xl font-bold text-xs transition-colors shadow-xs flex items-center space-x-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.5L19 7.5V19a2 2 0 01-2 2z"></path></svg>
+            <span>Informe Pedagògic Formal (.doc)</span>
+          </button>
+
+          <button onclick="FeedbackEngine.exportWordTranscript()" class="bg-slate-800 hover:bg-slate-900 text-white px-3.5 py-2.5 rounded-xl font-bold text-xs transition-colors shadow-xs flex items-center space-x-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.5L19 7.5V19a2 2 0 01-2 2z"></path></svg>
+            <span>Transcripció Oficial (.doc)</span>
+          </button>
+
+          <button onclick="UIController.goToView('setup')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 px-3 py-2 rounded-xl font-semibold text-xs transition-colors">
+            Nova Sessió
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- COLUMNA ESQUERRA: TAULER NUMÈRIC, SEMÀFOR I GRÀFIC HISTÒRIC (4 cols) -->
+        <div class="lg:col-span-4 space-y-6">
+
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 class="font-bold text-slate-900 text-sm">Tauler de Competències (0-10)</h3>
+              <div id="badge-average-score" class="px-2.5 py-1 rounded-xl text-xs font-black bg-emerald-100 text-emerald-800 border border-emerald-200">
+                Mitjana: 0.0 / 10
+              </div>
+            </div>
+
+            <div id="competencies-dashboard-container" class="space-y-3">
+            </div>
+
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-500 font-medium">
+              <span class="flex items-center space-x-1"><span class="w-2 h-2 rounded-full bg-red-500"></span> <span>&lt; 5.0 Millora</span></span>
+              <span class="flex items-center space-x-1"><span class="w-2 h-2 rounded-full bg-amber-500"></span> <span>5-7.5 En procés</span></span>
+              <span class="flex items-center space-x-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> <span>&gt; 7.5 Sòlid</span></span>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+              <h3 class="font-bold text-slate-900 text-xs uppercase tracking-wider">Evolució d'Intents de l'Alumne</h3>
+              <span class="text-[10px] text-slate-400">SVG Pur</span>
+            </div>
+            <p class="text-[11px] text-slate-500">
+              Historial de qualificacions mitjanes acumulades per <strong id="chart-student-label"></strong>:
+            </p>
+            <div id="svg-chart-container" class="pt-2">
+            </div>
+          </div>
+
+        </div>
+
+        <!-- COLUMNA DRETA: FEEDBACK QUALITATIU DESGLOSSAT (8 cols) -->
+        <div class="lg:col-span-8 space-y-6">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs">
+            <h3 class="font-bold text-lg text-slate-900 pb-3 border-b border-slate-100 mb-4 flex items-center space-x-2">
+              <span>📋</span>
+              <span>Dictamen Docent i Retorn Qualitatiu</span>
+            </h3>
+
+            <div id="feedback-qualitative-content" class="prose prose-sm max-w-none text-slate-700 space-y-4">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 py-4 mt-8 shrink-0">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p>Simulador Universal de Trobades Professionals &amp; Feedback Formatiu · Vanilla JS &amp; Tailwind CSS</p>
+      <p class="text-[11px] text-slate-400">Funciona al navegador · Requereix una clau d'API pròpia del proveïdor d'IA</p>
+    </div>
+  </footer>
+
+  <script>
+    const PREDEFINED_CASES = {
+      clinic: {
+        id: "cas_clinic_tpe_clara",
+        ambit: "clinic",
+        titol: "Entrevista inicial d'avaluació amb Clara (28 anys)",
+        briefing_inicial: {
+          demanda_manifesta: "Arriba dient que se sent buida, que ningú la comprèn i que la seva parella l'acaba de deixar.",
+          context_obert: "Derivada des d'urgències després d'una crisi d'angoixa intensa amb autolesions superficials.",
+          observacio_analogica: "Entra amb expressió desafiant, contacte visual intens, canvis sobtats de postura i to emocional plorós que alterna amb fredor."
+        },
+        personatges: [
+          {
+            nom: "Clara",
+            rol: "Pacient (28 anys)",
+            avatar_tag: "CLA",
+            color: "purple",
+            estil_comunicatiu: "Oscil·la entre la idealització del terapeuta ('per fi algú em mira com cal') i la devaluació ràpida ('vostè tampoc té ni idea del que em passa'). Respostes intenses, dramàtiques i amb por latent a l'abandonament.",
+            informacio_accessible: "Historial de ruptures amoroses tempestuoses i canvis freqüents de feina i amistats."
+          }
+        ],
+        dinamica_latent: "Inestabilitat identitària nuclear, hipervigilància al rebuig i mecanisme de defensa basat en l'escissió (tot blanc o tot negre).",
+        informacio_restringida: [
+          "Episodis de desregulació dissociativa en moments de discussió de parella.",
+          "Història d'invalidació emocional primerenca per part dels cuidadors primaris."
+        ]
+      },
+      educatiu: {
+        id: "cas_educatiu_mediacio_aula",
+        ambit: "educatiu",
+        titol: "Conflicte d'exclusió a 3r d'ESO entre Marc, Laia i el Tutor",
+        briefing_inicial: {
+          demanda_manifesta: "El tutor vol restablir la convivència a l'aula després d'un enfrontament verbal al passadís.",
+          context_obert: "Queixes de diverses famílies sobre missatges ofensius en un grup de missatgeria no escolar.",
+          observacio_analogica: "En Marc s'asseu amb la caputxa posada i braços plegats. La Laia seu rígida buscant l'aprovació del tutor. El tutor té un to d'esgotament acumulat."
+        },
+        personatges: [
+          {
+            nom: "Marc",
+            rol: "Alumne (14 anys)",
+            avatar_tag: "MAR",
+            color: "amber",
+            estil_comunicatiu: "Monoil·làbic, to defensiu, desconfiat dels adults ('a mi ningú em pregunta la meva versió').",
+            informacio_accessible: "Admet que va insultar la Laia perquè diu que porten mesos fent-li el buit."
+          },
+          {
+            nom: "Laia",
+            rol: "Alumna (15 anys)",
+            avatar_tag: "LAI",
+            color: "pink",
+            estil_comunicatiu: "Fluïda, to de queixa formal, justificativa, apel·la a les normes del centre.",
+            informacio_accessible: "Afirma que només feien comentaris en to de broma i que en Marc exagera."
+          },
+          {
+            nom: "Tutor",
+            rol: "Docent (48 anys)",
+            avatar_tag: "TUT",
+            color: "blue",
+            estil_comunicatiu: "Directiu, preocupat pel rendiment acadèmic i la disciplina a l'aula.",
+            informacio_accessible: "Vol una solució ràpida perquè el tema està afectant la resta de la classe."
+          }
+        ],
+        dinamica_latent: "Dinàmica d'assetjament invisible mitjançant microexclusió social sostinguda amb reacció explosiva de la víctima.",
+        informacio_restringida: [
+          "En Marc està vivint una situació d'aïllament social complet fora de l'institut.",
+          "La Laia té una forta pressió familiar per mantenir el seu rol de líder positiva."
+        ]
+      },
+      laboral: {
+        id: "cas_laboral_conflicte_producte",
+        ambit: "laboral",
+        titol: "Avaluació de rendiment i tensió de lideratge entre Elena i Bernat",
+        briefing_inicial: {
+          demanda_manifesta: "La direcció de persones intervé perquè el llançament del nou programari porta dos mesos de retard acumulats.",
+          context_obert: "Equip d'alt rendiment amb un increment significatiu de baixes per estrès en l'últim trimestre.",
+          observacio_analogica: "L'Elena arriba amb el portàtil obert teclejant amb urgència. En Bernat mira el rellotge amb impaciència i s'asseu creuant les cames amb actitud de superioritat tècnica."
+        },
+        personatges: [
+          {
+            nom: "Elena",
+            rol: "Tech Lead (36 anys)",
+            avatar_tag: "ELE",
+            color: "emerald",
+            estil_comunicatiu: "Tècnica, esgotada, exhaustiva en justificacions d'arquitectura, to defensiu respecte a la qualitat del codi.",
+            informacio_accessible: "Expressa que l'equip no pot suportar més canvis de prioritats a mitja sprint."
+          },
+          {
+            nom: "Bernat",
+            rol: "Product Owner (33 anys)",
+            avatar_tag: "BER",
+            color: "indigo",
+            estil_comunicatiu: "Orientat a negoci, impacient, minimitzador dels problemes d'enginyeria, llenguatge corporatiu agressiu.",
+            informacio_accessible: "Sosté que els desenvolupadors són lents i que cal complir amb el mercat coste el que coste."
+          }
+        ],
+        dinamica_latent: "Manca de confiança mútua sobre el valor professional de l'altre i desplaçament de l'ansietat de negoci cap a la pressió tècnica.",
+        informacio_restringida: [
+          "L'Elena està valorant una oferta externa per renunciar a l'empresa.",
+          "En Bernat té el seu propi bonus anual congelat si no es lliura el projecte aquest trimestre."
+        ]
+      }
+    };
+
+    const PREDEFINED_FRAMEWORKS = {
+      clinic: {
+        escola_id: "psicoterapia_integradora_tpe",
+        nom: "Avaluació Integradora de la Personalitat",
+        ambit_aplicacio: "clinic",
+        criteris_copilot: {
+          rol_supervisor: "Supervisor clínic expert en psicopatologia de la personalitat i vincle terapèutic.",
+          enfocament_hipotesi: "Identifica patrons d'inestabilitat afectiva, control d'impulsos, identitat i relacions interpersonals.",
+          criteri_neutralitat: "Vigila que el terapeuta no caigui en el rescat heroic ni en la distància defensiva davant la provocació."
+        },
+        eina_reformulacio: {
+          nom_boto: "✨ Validar Emocionalment",
+          instruccio_optimitacio: "Reescriu la intervenció perquè validi primer el dolor emocional subjacent abans d'explorar conductes desadaptatives o fets concrets."
+        },
+        dimensions_avaluacio: [
+          {
+            id: "dim_1",
+            nom: "Exploració de la Identitat i Sentit del Jo",
+            indicadors: ["Pregunta sobre la imatge pròpia", "Explora sentiments de buit crònic"]
+          },
+          {
+            id: "dim_2",
+            nom: "Regulació Afectiva i Impulsivitat",
+            indicadors: ["Detecta detonants de desregulació", "Explora mecanismes de modulació de l'angoixa"]
+          },
+          {
+            id: "dim_3",
+            nom: "Patró Relacional i Por a l'Abandonament",
+            indicadors: ["Avalua estabilitat de vincles", "Identifica patrons d'idealització/devaluació"]
+          },
+          {
+            id: "dim_4",
+            nom: "Validació i Contenció Terapèutica",
+            indicadors: ["Evita confrontacions prematures", "Estableix un marc de seguretat emocional"]
+          },
+          {
+            id: "dim_5",
+            nom: "Diferenciació Diagnòstica Funcional",
+            indicadors: ["Distingeix símptoma reactiu d'estructura de personalitat", "No etiqueta precipitadament"]
+          }
+        ]
+      },
+      educatiu: {
+        escola_id: "practiques_restauratives_escolars",
+        nom: "Enfocament Restauratiu i Mediació Transformadora",
+        ambit_aplicacio: "educatiu",
+        criteris_copilot: {
+          rol_supervisor: "Expert en justícia restaurativa comunitària i resolució positiva de conflictes escolars.",
+          enfocament_hipotesi: "Focalitza en l'impacte de les accions, el reconeixement de danys i les necessitats de reparació mútua.",
+          criteri_neutralitat: "Assegura que el mediador no es converteixi en un jutge que decideix culpabilitats."
+        },
+        eina_reformulacio: {
+          nom_boto: "✨ Restaurar Pregunta",
+          instruccio_optimitacio: "Reescriu la pregunta acusatòria ('Per què vas fer això?') en una pregunta restaurativa d'impacte ('Què va passar i com us ha afectat a cadascú?')."
+        },
+        dimensions_avaluacio: [
+          {
+            id: "dim_1",
+            nom: "Focalització en les Necessitats Subjacents",
+            indicadors: ["Investiga què necessita cada part per estar tranquil·la", "Va més enllà de la culpa"]
+          },
+          {
+            id: "dim_2",
+            nom: "Equidistància i Desactivació de Judicis",
+            indicadors: ["No dona la raó automàticament a cap part", "Conté els retrets creuats"]
+          },
+          {
+            id: "dim_3",
+            nom: "Responsabilització Sense Humiliació",
+            indicadors: ["Convida a reconèixer l'impacte de les pròpies conductes", "Fomenta empatia"]
+          },
+          {
+            id: "dim_4",
+            nom: "Orientació a la Reparació Sostenible",
+            indicadors: ["Genera acords pràctics i mesurables", "Facilita compromisos mutus"]
+          },
+          {
+            id: "dim_5",
+            nom: "Creació de Clima de Seguretat Dialògica",
+            indicadors: ["Regula els torns de paraula", "Dona espai al silenci d'en Marc"]
+          }
+        ]
+      },
+      laboral: {
+        escola_id: "cnv_gestio_conflictes_organitzacions",
+        nom: "Comunicació No Violenta i Negociació Basada en Interessos",
+        ambit_aplicacio: "laboral",
+        criteris_copilot: {
+          rol_supervisor: "Consultor sènior en desenvolupament organitzacional, negociació Harvard i CNV.",
+          enfocament_hipotesi: "Diferencia fets d'avaluacions, i posicions de negociació respecte a interessos i necessitats reals.",
+          criteri_neutralitat: "Equilibra el pes del negoci i el benestar de l'equip sense decantar-se per cap persona."
+        },
+        eina_reformulacio: {
+          nom_boto: "✨ Transformar en Interès",
+          instruccio_optimitacio: "Reescriu la intervenció separant els fets observables dels judicis de valor, traduint les queixes en necessitats d'eficiència i seguretat."
+        },
+        dimensions_avaluacio: [
+          {
+            id: "dim_1",
+            nom: "Diferenciació de Fets vs Judicis de Valor",
+            indicadors: ["Focalitza en dades objectives de rendiment", "Evita etiquetar les intencions de les parts"]
+          },
+          {
+            id: "dim_2",
+            nom: "Identificació d'Interessos Reals (Més enllà de Posicions)",
+            indicadors: ["Explora què necessita cadascú", "Descobreix els condicionants de negoci i equip"]
+          },
+          {
+            id: "dim_3",
+            nom: "Gestió de la Reactivitat Emocional Professional",
+            indicadors: ["Desactiva els retrets mutus", "Condueix cap al propòsit compartit de l'empresa"]
+          },
+          {
+            id: "dim_4",
+            nom: "Equitat i Balanç del Poder Negociador",
+            indicadors: ["Dona el mateix pes a la sostenibilitat tècnica que als terminis de mercat"]
+          },
+          {
+            id: "dim_5",
+            nom: "Co-construcció d'Acords Operatius Concrets",
+            indicadors: ["Defineix compromisos d'acció mesurables", "Estableix protocols de seguiment clar"]
+          }
+        ]
+      }
+    };
+
+    const SKELETON_CASE = {
+      id: "identificador_del_cas",
+      ambit: "clinic",
+      titol: "Títol descriptiu de la situació",
+      briefing_inicial: {
+        demanda_manifesta: "Què diuen que volen aconseguir d'entrada.",
+        context_obert: "Informació accessible per l'estudiant abans d'obrir la porta.",
+        observacio_analogica: "Distribució física a la sala, llenguatge corporal i gestual."
+      },
+      personatges: [
+        {
+          nom: "NomPersonatge1",
+          rol: "Rol i caracterització bàsica",
+          avatar_tag: "NP1",
+          color: "purple",
+          estil_comunicatiu: "To, ritme, com respon a preguntes obertes o tancades.",
+          informacio_accessible: "Informació que no amaga si se li pregunta."
+        },
+        {
+          nom: "NomPersonatge2",
+          rol: "Rol i caracterització bàsica",
+          avatar_tag: "NP2",
+          color: "blue",
+          estil_comunicatiu: "To, ritme, com respon a preguntes obertes o tancades.",
+          informacio_accessible: "Informació que no amaga si se li pregunta."
+        }
+      ],
+      dinamica_latent: "La dinàmica profunda que explica la situació i que l'estudiant ha de descobrir.",
+      informacio_restringida: [
+        "Dada sensible 1 que només s'allibera amb intervencions pertinents.",
+        "Dada sensible 2 que requereix clima de seguretat o vinculació."
+      ]
+    };
+
+    const SKELETON_FRAMEWORK = {
+      escola_id: "identificador_escola",
+      nom: "Nom de l'Escola o Model Teòric",
+      ambit_aplicacio: "clinic",
+      criteris_copilot: {
+        rol_supervisor: "Supervisor expert en [metodologia]. To docent i constructiu.",
+        enfocament_hipotesi: "Criteris des d'on interpretar el cas en temps real.",
+        criteri_neutralitat: "Pautes d'equidistància i gestió de la posició professional."
+      },
+      eina_reformulacio: {
+        nom_boto: "✨ Circularitzar",
+        instruccio_optimitacio: "Instrucció a la IA sobre com reformular la intervenció lineal en una adaptada al model."
+      },
+      dimensions_avaluacio: [
+        {
+          id: "dim_1",
+          nom: "Dimensió 1",
+          indicadors: ["Indicador observable 1.1", "Indicador observable 1.2"]
+        },
+        {
+          id: "dim_2",
+          nom: "Dimensió 2",
+          indicadors: ["Indicador observable 2.1", "Indicador observable 2.2"]
+        },
+        {
+          id: "dim_3",
+          nom: "Dimensió 3",
+          indicadors: ["Indicador observable 3.1", "Indicador observable 3.2"]
+        },
+        {
+          id: "dim_4",
+          nom: "Dimensió 4",
+          indicadors: ["Indicador observable 4.1", "Indicador observable 4.2"]
+        },
+        {
+          id: "dim_5",
+          nom: "Dimensió 5",
+          indicadors: ["Indicador observable 5.1", "Indicador observable 5.2"]
+        }
+      ]
+    };
+
+    const TemplateManager = {
+      downloadJSON(data, filename) {
+        const jsonStr = JSON.stringify(data, null, 2);
+        const blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      },
+      downloadCaseTemplate() {
+        this.downloadJSON(SKELETON_CASE, 'fitxa_cas_plantilla.json');
+      },
+      downloadFrameworkTemplate() {
+        this.downloadJSON(SKELETON_FRAMEWORK, 'marc_teoric_plantilla.json');
+      }
+    };
+
+    const UniversalApiClient = {
+      MODELS: {
+        gemini: [
+          { id: 'gemini-2.5-flash', name: 'Gemini 2.5 Flash (Ràpid i recomanat)', default: true }
+        ],
+        openai: [
+          { id: 'gpt-4o-mini', name: 'GPT-4o Mini (Econòmic i precís)', default: true },
+          { id: 'gpt-4o', name: 'GPT-4o (Màxima profunditat)' }
+        ],
+        claude: [
+          { id: 'claude-sonnet-5-5', name: 'Claude Sonnet 5.5 (Recomanat)', default: true },
+          { id: 'claude-haiku-5-5', name: 'Claude Haiku 5.5 (Ràpid i econòmic)' }
+        ],
+        mistral: [
+          { id: 'mistral-large-latest', name: 'Mistral Large (Raonament sòlid)', default: true },
+          { id: 'mistral-small-latest', name: 'Mistral Small (Lleuger)' }
+        ]
+      },
+
+      saveApiKey(provider, key) {
+        if (!provider || !key) return;
+        localStorage.setItem(`universal_api_key_${provider}`, key.trim());
+      },
+
+      getApiKey(provider) {
+        return localStorage.getItem(`universal_api_key_${provider}`) || '';
+      },
+
+      async executeFetch(url, options) {
+        try {
+          const response = await fetch(url, options);
+          if (response.ok) {
+            return await response.json();
+          }
+          const errorData = await response.json().catch(() => ({}));
+          let errMsg = errorData.error?.message || errorData.error || `Error HTTP ${response.status}: ${response.statusText}`;
+          if (typeof errMsg === 'object') errMsg = JSON.stringify(errMsg);
+          throw new Error(errMsg);
+        } catch (err) {
+          if (err.name === 'TypeError' && err.message.includes('fetch')) {
+            throw new Error("BLOCAT_PER_CORS");
+          }
+          throw err;
+        }
+      },
+
+      async _callGemini(apiKey, model, systemPrompt, messages) {
+        const activeModel = model || 'gemini-2.5-flash';
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${activeModel}:generateContent?key=${apiKey}`;
+
+        const contents = messages.map(msg => ({
+          role: msg.role === 'assistant' ? 'model' : 'user',
+          parts: [{ text: msg.content }]
+        }));
+
+        const payload = {
+          contents: contents,
+          systemInstruction: {
+            parts: [{ text: systemPrompt }]
+          }
+        };
+
+        const data = await this.executeFetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (!reply) throw new Error("Gemini ha retornat una resposta buida.");
+        return reply;
+      },
+
+      async _callOpenAI(apiKey, model, systemPrompt, messages) {
+        const activeModel = model || 'gpt-4o-mini';
+        const url = 'https://api.openai.com/v1/chat/completions';
+
+        const payload = {
+          model: activeModel,
+          messages: [
+            { role: 'system', content: systemPrompt },
+            ...messages.map(msg => ({
+              role: msg.role === 'assistant' ? 'assistant' : 'user',
+              content: msg.content
+            }))
+          ]
+        };
+
+        const data = await this.executeFetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const reply = data.choices?.[0]?.message?.content;
+        if (!reply) throw new Error("OpenAI ha retornat una resposta buida.");
+        return reply;
+      },
+
+      async _callClaude(apiKey, model, systemPrompt, messages) {
+        const activeModel = model || 'claude-sonnet-5-5';
+        const url = 'https://api.anthropic.com/v1/messages';
+
+        const payload = {
+          model: activeModel,
+          max_tokens: 4096,
+          system: systemPrompt,
+          messages: messages.map(msg => ({
+            role: msg.role === 'assistant' ? 'assistant' : 'user',
+            content: msg.content
+          }))
+        };
+
+        const data = await this.executeFetch(url, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'x-api-key': apiKey,
+            'anthropic-version': '2023-06-01',
+            'anthropic-dangerous-direct-browser-access': 'true'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const reply = data.content?.[0]?.text;
+        if (!reply) throw new Error("Claude ha retornat una resposta buida.");
+        return reply;
+      },
+
+      async _callMistral(apiKey, model, systemPrompt, messages) {
+        const activeModel = model || 'mistral-large-latest';
+        const url = 'https://api.mistral.ai/v1/chat/completions';
+
+        const payload = {
+          model: activeModel,
+          messages: [
+            { role: 'system', content: systemPrompt },
+            ...messages.map(msg => ({
+              role: msg.role === 'assistant' ? 'assistant' : 'user',
+              content: msg.content
+            }))
+          ]
+        };
+
+        const data = await this.executeFetch(url, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'accept': 'application/json',
+            'authorization': `Bearer ${apiKey}`
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const reply = data.choices?.[0]?.message?.content;
+        if (!reply) throw new Error("Mistral ha retornat una resposta buida.");
+        return reply;
+      },
+
+      async sendMessage({ provider, apiKey, model, systemPrompt, messages }) {
+        if (!apiKey) {
+          throw new Error(`Cal proporcionar una clau API per al proveïdor ${provider ? provider.toUpperCase() : 'IA'}.`);
+        }
+        if (!messages || messages.length === 0) {
+          throw new Error("L'historial de conversa no pot estar buit.");
+        }
+
+        switch (provider) {
+          case 'gemini':
+            return await this._callGemini(apiKey, model, systemPrompt, messages);
+          case 'openai':
+            return await this._callOpenAI(apiKey, model, systemPrompt, messages);
+          case 'claude':
+            return await this._callClaude(apiKey, model, systemPrompt, messages);
+          case 'mistral':
+            return await this._callMistral(apiKey, model, systemPrompt, messages);
+          default:
+            throw new Error(`El proveïdor "${provider}" no està suportat pel motor universal.`);
+        }
+      },
+
+      formatUserFriendlyError(err, provider) {
+        if (err.message === "BLOCAT_PER_CORS") {
+          return {
+            title: "Connexió Web Bloquejada (Polítiques CORS)",
+            details: "El servidor del proveïdor ha bloquejat la petició feta directament des del navegador.",
+            solution: "Recomanem canviar de motor a Google Gemini, OpenAI o Claude, que admeten connexions des del navegador."
+          };
+        }
+        if (err.message.includes("quota") || err.message.includes("rate limit") || err.message.includes("exceeded")) {
+          return {
+            title: "Límit de Quota o Saldo Assolit",
+            details: err.message,
+            solution: `El compte de ${provider.toUpperCase()} no disposa de fons o s'ha esgotat la quota gratuïta. Revisa el panell de facturació del proveïdor.`
+          };
+        }
+        if (err.message.includes("API key") || err.message.includes("unauthorized") || err.message.includes("401")) {
+          return {
+            title: "Clau API Invàlida o Sense Permisos",
+            details: err.message,
+            solution: `Verifica que la clau introduïda estigui ben copiada (sense espais en blanc) i correspongui a la plataforma ${provider.toUpperCase()}.`
+          };
+        }
+        return {
+          title: "Incidència de Comunicació amb la IA",
+          details: err.message,
+          solution: "Verifica la connexió a internet o revisa la configuració del model al selector."
+        };
+      }
+    };
+
+    const PromptEngine = {
+      getSimulationSystemPrompt(cas, escola) {
+        const personatgesText = cas.personatges.map(p => {
+          return `- ${p.nom} (${p.rol}):\n  * Estil: ${p.estil_comunicatiu}\n  * Informació accessible: ${p.informacio_accessible}`;
+        }).join("\n");
+
+        const restringidaText = (cas.informacio_restringida || []).map(r => `  * ${r}`).join("\n");
+
+        return `ROL GENERAL:
+Actua com un simulador d'entrevistes i trobades professionals per a l'entrenament competencial en l'àmbit ${cas.ambit.toUpperCase()}.
+La teva funció és encarnar i representar fidelment les persones que intervenen en aquesta situació.
+En aquesta fase NO ets un supervisor, ni un docent, ni un assistent: ets exclusivament els personatges descrits a continuació.
+
+DADES DE LA SITUACIÓ:
+Títol: ${cas.titol}
+Demanda manifesta: ${cas.briefing_inicial.demanda_manifesta}
+Context observable: ${cas.briefing_inicial.context_obert}
+Observació analògica a la sala: ${cas.briefing_inicial.observacio_analogica}
+
+PERSONATGES PRESENTS I CARACTERITZACIÓ:
+${personatgesText}
+
+DINÀMICA LATENT (INFORMACIÓ RESTRINGIDA):
+- Dinàmica profunda: ${cas.dinamica_latent}
+- Dades que només emergiran si l'entrevistador/a aprofundeix adequadament:
+${restringidaText}
+
+REGLES CRÍTIQUES DE RESPOSTA EN SIMULACIÓ:
+1. FORMAT DE DIÀLEG OBLIGATORI: Cada intervenció ha de començar expressament amb el nom del personatge entre claudàtors, seguit de dos punts i el text:
+   [Nom]: Text que diu aquest personatge.
+2. DIRIGIR LA PARAULA:
+   - Si la intervenció s'adreça a algú concret, respondrà aquest personatge.
+   - Si és una intervenció general o a tots, genera un diàleg breu creuat entre personatges, amb el prefix [Nom]: a cada línia.
+3. ESTIL I BARRERES:
+   - Llenguatge humà, parcial, amb silencis o contradiccions pròpies del cas.
+   - NO utilitzis terminologia teòrica del model "${escola.nom}".
+   - Si l'entrevistador/a fa preguntes massa teòriques o acusa, reacciona amb resistència realista.
+4. Mantén-te estrictament en el rol dels personatges.`;
+      },
+
+      getOptimizationPrompt(cas, escola, esborranyEstudiant) {
+        return `Ets un supervisor docent expert en el marc metodològic: "${escola.nom}".
+L'estudiant està realitzant una entrevista en el cas titulat "${cas.titol}".
+L'estudiant ha redactat el següent esborrany d'intervenció: "${esborranyEstudiant}".
+
+LA TEVA TASCA:
+Aplica la següent instrucció d'optimització pròpia de la teva escola:
+"${escola.eina_reformulacio.instruccio_optimitacio}"
+
+REGLA D'OR:
+Retorna ÚNICAMENT i EXCLUSIVAMENT la pregunta o intervenció reformulada en català. 
+No afegeixis salutacions, ni justificacions, ni explicacions teòriques, ni cometes. Només el text llest per ser enviat al xat.`;
+      },
+
+      getHypothesisPrompt(cas, escola) {
+        return `Ets un supervisor sènior amb el següent rol: ${escola.criteris_copilot.rol_supervisor}.
+Analitza exhaustivament la transcripció del diàleg mantingut fins a aquest moment entre l'entrevistador/a i els personatges de la situació "${cas.titol}".
+
+CRITERI D'ANÀLISI:
+${escola.criteris_copilot.enfocament_hipotesi}
+
+OBJECTIU:
+Formula una hipòtesi de treball clara, profunda i connectada amb les evidències que han aparegut al diàleg. 
+Respon de forma constructiva, sintètica (màxim 2-3 paràgrafs) i en llengua catalana.`;
+      },
+
+      getNeutralityPrompt(cas, escola) {
+        return `Ets un supervisor docent amb el següent rol: ${escola.criteris_copilot.rol_supervisor}.
+Revisa les intervencions de l'estudiant en la conversa actual amb els personatges.
+
+CRITERI DE NEUTRALITAT:
+${escola.criteris_copilot.criteri_neutralitat}
+
+OBJECTIU:
+Analitza si l'entrevistador/a ha mantingut una posició d'equidistància funcional, si ha distribuït equilibradament la paraula o si ha generat microaliances involuntàries amb alguna de les parts.
+Ofereix un consell pedagògic pràctic i empàtic per reequilibrar la intervenció. Respon en català (màxim 2 paràgrafs).`;
+      },
+
+      getSupervisorQueryPrompt(cas, escola, consultaLliure) {
+        return `Ets un supervisor docent amb el següent rol: ${escola.criteris_copilot.rol_supervisor}.
+L'estudiant que està conduint l'entrevista del cas "${cas.titol}" et fa aquesta consulta directa:
+"${consultaLliure}"
+
+Tenint en compte l'historial de la conversa mantinguda i els principis de l'escola "${escola.nom}", orienta l'estudiant de manera pedagògica, pràctica i sense substituir la seva presa de decisions. Respon en català en un to proper i constructiu.`;
+      },
+
+      getFeedbackPrompt(cas, escola) {
+        const dimensionsText = escola.dimensions_avaluacio.map((dim, idx) => {
+          const indicadorsText = dim.indicadors.map(ind => `     * ${ind}`).join("\n");
+          return `   ${idx + 1}. ${dim.nom} (ID: ${dim.id}):\n${indicadorsText}`;
+        }).join("\n");
+
+        return `L'entrevista ha finalitzat formalment. A partir d'aquest moment ABANDONES completament el rol dels personatges i adoptes el rol de:
+${escola.criteris_copilot.rol_supervisor}.
+
+El teu objectiu és realitzar l'informe final d'avaluació formativa i competencial sobre l'actuació de l'estudiant durant tota l'entrevista, aplicant amb màxim rigor el marc metodològic: "${escola.nom}".
+
+L'informe ha de seguir OBLIGATÒRIAMENT aquesta estructura detallada:
+
+# INFORME DE FEEDBACK COMPETENCIAL
+
+## 1. Retorn Vivencial des dels Personatges (En Rol)
+Com s'ha sentit cadascun dels personatges (${cas.personatges.map(p => p.nom).join(", ")}) durant la trobada: si s'han sentit escoltats, jutjats, forçats o compresos. Llenguatge directe i sincer.
+
+## 2. Avaluació Formativa per Dimensions Competencials
+Avalua de manera específica cadascuna de les 5 dimensions següents:
+${dimensionsText}
+
+Per a CADA UNA de les 5 dimensions, has d'incloure exactament aquests 3 apartats:
+- **Nivell d'exploració:** (Explorada sòlidament / Parcialment explorada / Escassament explorada / No explorada)
+- **Evidències observades:** Cita preguntes o intervencions literals de l'estudiant que justifiquen el nivell.
+- **Hipòtesis i anàlisi metodològic:** Lectura de la situació des dels conceptes clau de "${escola.nom}".
+
+## 3. Oportunitats d'Ampliació i Millora
+Fórmula suggeriments orientats al futur ("Podries aprofundir en...", "En una propera sessió convindria explorar...") per a aquelles dimensions menys treballades.
+
+## 4. Raonament Professional i Metodològic
+Analitza la coherència general de l'entrevista, si les intervencions tenien un propòsit clar o eren disperses, i com ha aplicat els principis de "${escola.nom}".
+
+## 5. Gestió de la Neutralitat i Posició Professional
+Analitza l'equidistància, la contenció emocional i la gestió dels torns i de les aliances.
+
+BLOC NUMÈRIC ESTRUCTURAT (OBLIGATORI AL FINAL DE TOT):
+A l'última línia de la teva resposta, separada de la resta, has de col·locar EXACTAMENT aquest bloc amb notes enteres de 0 a 10 per a cadascuna de les 5 dimensions:
+
+[PUNTUACIONS] ${escola.dimensions_avaluacio[0].id}: X/10 | ${escola.dimensions_avaluacio[1].id}: Y/10 | ${escola.dimensions_avaluacio[2].id}: Z/10 | ${escola.dimensions_avaluacio[3].id}: W/10 | ${escola.dimensions_avaluacio[4].id}: K/10 [/PUNTUACIONS]
+
+On X, Y, Z, W, K són les notes reals (0-10) que reflecteixen la competència demostrada per l'estudiant en cadascuna de les 5 dimensions.`;
+      }
+    };
+
+    const COLOR_PALETTES = {
+      pink: {
+        avatar: 'bg-pink-600 text-white',
+        bubble: 'bg-pink-50/80 border border-pink-200 text-slate-800',
+        tag: 'text-pink-700 font-bold',
+        badge: 'bg-pink-100 text-pink-800'
+      },
+      blue: {
+        avatar: 'bg-blue-600 text-white',
+        bubble: 'bg-blue-50/80 border border-blue-200 text-slate-800',
+        tag: 'text-blue-700 font-bold',
+        badge: 'bg-blue-100 text-blue-800'
+      },
+      purple: {
+        avatar: 'bg-purple-600 text-white',
+        bubble: 'bg-purple-50/80 border border-purple-200 text-slate-800',
+        tag: 'text-purple-700 font-bold',
+        badge: 'bg-purple-100 text-purple-800'
+      },
+      amber: {
+        avatar: 'bg-amber-600 text-white',
+        bubble: 'bg-amber-50/80 border border-amber-200 text-slate-800',
+        tag: 'text-amber-700 font-bold',
+        badge: 'bg-amber-100 text-amber-800'
+      },
+      emerald: {
+        avatar: 'bg-emerald-600 text-white',
+        bubble: 'bg-emerald-50/80 border border-emerald-200 text-slate-800',
+        tag: 'text-emerald-700 font-bold',
+        badge: 'bg-emerald-100 text-emerald-800'
+      },
+      indigo: {
+        avatar: 'bg-indigo-600 text-white',
+        bubble: 'bg-indigo-50/80 border border-indigo-200 text-slate-800',
+        tag: 'text-indigo-700 font-bold',
+        badge: 'bg-indigo-100 text-indigo-800'
+      },
+      slate: {
+        avatar: 'bg-slate-700 text-white',
+        bubble: 'bg-white border border-slate-200 text-slate-800',
+        tag: 'text-slate-600 font-bold',
+        badge: 'bg-slate-100 text-slate-700'
+      }
+    };
+
+    const UIEngine = {
+      buildSpeakerRegex(personatges) {
+        const namesPattern = personatges.map(p => p.nom.trim()).join('|');
+        return new RegExp(`(?:^|\\n)\\s*(?:\\[(${namesPattern})\\]|(${namesPattern}))\\s*:\\s*([\\s\\S]*?)(?=\\n\\s*(?:\\[(?:${namesPattern})\\]|(?:${namesPattern}))\\s*:|$)`, 'gi');
+      },
+
+      renderCoralResponse(rawText, cas, feedContainer) {
+        let cleanRaw = rawText.replace(/^\[(?:FAMÍLIA|GRUP|EQUIP)\]\s*:\s*/i, '').trim();
+        const regex = this.buildSpeakerRegex(cas.personatges);
+        const matches = [...cleanRaw.matchAll(regex)];
+
+        if (matches.length > 0) {
+          matches.forEach(match => {
+            const speakerName = (match[1] || match[2]).trim();
+            const dialogueText = match[3].trim();
+            
+            const personatgeConfig = cas.personatges.find(
+              p => p.nom.toLowerCase() === speakerName.toLowerCase()
+            );
+
+            const colorKey = personatgeConfig?.color || 'slate';
+            const avatarTag = personatgeConfig?.avatar_tag || speakerName.substring(0, 3).toUpperCase();
+            const displayLabel = personatgeConfig ? `${personatgeConfig.nom} (${personatgeConfig.rol})` : speakerName;
+
+            this.appendCharacterBubble(feedContainer, {
+              name: displayLabel,
+              tag: avatarTag,
+              text: dialogueText,
+              palette: COLOR_PALETTES[colorKey] || COLOR_PALETTES.slate
+            });
+          });
+        } else {
+          this.appendCharacterBubble(feedContainer, {
+            name: "Grup / Personatges",
+            tag: "GRP",
+            text: cleanRaw,
+            palette: COLOR_PALETTES.slate
+          });
+        }
+
+        feedContainer.scrollTop = feedContainer.scrollHeight;
+      },
+
+      appendCharacterBubble(container, { name, tag, text, palette }) {
+        const wrapper = document.createElement('div');
+        wrapper.className = "flex space-x-3 max-w-3xl mr-auto mb-4 w-full animate-fadeIn";
+        const formattedText = text.replace(/\n/g, '<br>');
+
+        wrapper.innerHTML = `
+          <div class="w-8 h-8 rounded-full ${palette.avatar} flex items-center justify-center text-[10px] font-bold shrink-0 shadow-sm">
+            <span>${tag}</span>
+          </div>
+          <div class="${palette.bubble} p-3.5 sm:p-4 rounded-2xl shadow-xs text-xs sm:text-sm w-full font-sans">
+            <p class="text-[10px] ${palette.tag} mb-1 tracking-wider uppercase">${name}</p>
+            <p class="leading-relaxed text-slate-800">${formattedText}</p>
+          </div>
+        `;
+
+        container.appendChild(wrapper);
+      },
+
+      renderUserMessage(container, text, targetName, studentName) {
+        const wrapper = document.createElement('div');
+        wrapper.className = "flex space-x-3 max-w-3xl ml-auto justify-end mb-4 animate-fadeIn";
+        const avatarBadge = (studentName || "EST").substring(0, 3).toUpperCase();
+
+        wrapper.innerHTML = `
+          <div class="bg-sky-50 border border-sky-200 p-3.5 sm:p-4 rounded-2xl shadow-xs text-xs sm:text-sm order-1 text-slate-900 max-w-2xl">
+            <p class="text-[10px] font-bold text-sky-700 mb-1 tracking-wider uppercase">Dirigit a: ${targetName}</p>
+            <p class="leading-relaxed">${text.replace(/\n/g, '<br>')}</p>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-sky-600 text-white flex items-center justify-center text-[10px] font-bold shrink-0 shadow-sm order-2 ml-2 sm:ml-3">
+            <span>${avatarBadge}</span>
+          </div>
+        `;
+
+        container.appendChild(wrapper);
+        container.scrollTop = container.scrollHeight;
+      },
+
+      renderSystemNotice(container, text) {
+        const wrapper = document.createElement('div');
+        wrapper.className = "my-4 flex items-center justify-center";
+        wrapper.innerHTML = `
+          <div class="bg-slate-200/80 text-slate-600 text-[11px] font-medium px-4 py-1.5 rounded-full border border-slate-300 shadow-2xs text-center">
+            ${text}
+          </div>
+        `;
+        container.appendChild(wrapper);
+        container.scrollTop = container.scrollHeight;
+      },
+
+      renderError(container, errorObj, onRetry) {
+        const wrapper = document.createElement('div');
+        wrapper.className = "flex space-x-3 max-w-3xl mr-auto mb-4 w-full";
+        wrapper.innerHTML = `
+          <div class="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center text-white text-[10px] font-bold shrink-0 shadow-sm">
+            <span>ERR</span>
+          </div>
+          <div class="bg-red-50 border border-red-200 p-4 rounded-2xl shadow-xs text-xs sm:text-sm w-full text-red-950 font-sans">
+            <p class="font-bold text-red-800 text-xs sm:text-sm mb-1">${errorObj.title}</p>
+            <p class="text-xs text-red-900 mb-2 leading-relaxed">${errorObj.details}</p>
+            <p class="text-xs text-slate-700 bg-white/70 p-2 rounded-lg border border-red-100 mb-3"><strong>Recomanació:</strong> ${errorObj.solution}</p>
+            <button class="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-lg transition-colors" id="btn-error-retry">
+              Reintentar
+            </button>
+          </div>
+        `;
+
+        container.appendChild(wrapper);
+        wrapper.querySelector('#btn-error-retry')?.addEventListener('click', onRetry);
+        container.scrollTop = container.scrollHeight;
+      }
+    };
+
+    const TRAFFIC_LIGHT_THEME = {
+      red: {
+        text: 'text-red-600',
+        bg: 'bg-red-500',
+        badge: 'bg-red-100 text-red-700 border-red-200'
+      },
+      amber: {
+        text: 'text-amber-600',
+        bg: 'bg-amber-500',
+        badge: 'bg-amber-100 text-amber-700 border-amber-200'
+      },
+      green: {
+        text: 'text-emerald-600',
+        bg: 'bg-emerald-500',
+        badge: 'bg-emerald-100 text-emerald-700 border-emerald-200'
+      }
+    };
+
+    function getScoreTheme(score) {
+      if (score < 5.0) return TRAFFIC_LIGHT_THEME.red;
+      if (score < 7.5) return TRAFFIC_LIGHT_THEME.amber;
+      return TRAFFIC_LIGHT_THEME.green;
+    }
+
+    const AnalyticsExportEngine = {
+      parseDynamicScores(feedbackText, escola) {
+        const defaultScores = {};
+        escola.dimensions_avaluacio.forEach(dim => {
+          defaultScores[dim.id] = 5;
+        });
+
+        const result = {
+          scores: { ...defaultScores },
+          average: 5.0
+        };
+
+        try {
+          const blockMatch = feedbackText.match(/\[PUNTUACIONS\]([\s\S]*?)\[\/PUNTUACIONS\]/i);
+          if (!blockMatch) return result;
+
+          const blockContent = blockMatch[1];
+          let totalAccumulated = 0;
+          let validCount = 0;
+
+          escola.dimensions_avaluacio.forEach(dim => {
+            const escapedId = dim.id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const escapedName = dim.nom.split(' ')[0].replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            
+            const pattern = new RegExp(`(?:${escapedId}|${escapedName})\\s*:\\s*(\\d{1,2})(?:\\s*\\/\\s*10)?`, 'i');
+            const match = blockContent.match(pattern);
+
+            if (match) {
+              let val = parseInt(match[1], 10);
+              if (isNaN(val) || val < 0) val = 0;
+              if (val > 10) val = 10;
+              result.scores[dim.id] = val;
+              totalAccumulated += val;
+              validCount++;
+            } else {
+              totalAccumulated += result.scores[dim.id];
+              validCount++;
+            }
+          });
+
+          if (validCount > 0) {
+            result.average = Math.round((totalAccumulated / validCount) * 10) / 10;
+          }
+        } catch (err) {
+          console.warn("Avís en el parser de notes:", err.message);
+        }
+
+        return result;
+      },
+
+      saveAttemptHistory(studentName, caseId, parsedScores) {
+        const cleanKey = `univ_sim_hist_${studentName.trim().toLowerCase().replace(/\s+/g, '_')}`;
+        let history = [];
+        try {
+          history = JSON.parse(localStorage.getItem(cleanKey) || "[]");
+        } catch (e) {
+          history = [];
+        }
+
+        const now = new Date();
+        history.push({
+          caseId: caseId,
+          date: now.toLocaleDateString(),
+          time: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          average: parsedScores.average,
+          scores: parsedScores.scores
+        });
+
+        localStorage.setItem(cleanKey, JSON.stringify(history));
+        return history;
+      },
+
+      getAttemptHistory(studentName) {
+        const cleanKey = `univ_sim_hist_${studentName.trim().toLowerCase().replace(/\s+/g, '_')}`;
+        try {
+          return JSON.parse(localStorage.getItem(cleanKey) || "[]");
+        } catch (e) {
+          return [];
+        }
+      },
+
+      renderCompetencyDashboard(containerId, parsedScores, escola) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        container.innerHTML = '';
+
+        escola.dimensions_avaluacio.forEach(dim => {
+          const val = parsedScores.scores[dim.id] ?? 5;
+          const theme = getScoreTheme(val);
+          const percentage = Math.min(Math.max(val * 10, 0), 100);
+
+          const row = document.createElement('div');
+          row.className = "space-y-1";
+          row.innerHTML = `
+            <div class="flex justify-between items-center text-xs font-semibold text-slate-700">
+              <span class="truncate pr-2" title="${dim.nom}">${dim.nom}</span>
+              <span class="${theme.text} font-bold shrink-0">${val}/10</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+              <div 
+                class="h-2.5 rounded-full ${theme.bg} transition-all duration-700 ease-out" 
+                style="width: 0%" 
+                data-target-width="${percentage}%"
+              ></div>
+            </div>
+          `;
+          container.appendChild(row);
+        });
+
+        setTimeout(() => {
+          container.querySelectorAll('[data-target-width]').forEach(el => {
+            el.style.width = el.getAttribute('data-target-width');
+          });
+        }, 100);
+      },
+
+      renderProgressChart(chartContainerId, history) {
+        const container = document.getElementById(chartContainerId);
+        if (!container) return;
+
+        if (!history || history.length < 2) {
+          container.innerHTML = `
+            <div class="h-28 w-full flex items-center justify-center bg-slate-50 border border-dashed border-slate-200 rounded-xl text-xs text-slate-400 text-center px-4">
+              Realitza almenys dues sessions per visualitzar la teva línia d'evolució competencial.
+            </div>
+          `;
+          return;
+        }
+
+        const width = 300;
+        const height = 110;
+        const padX = 25;
+        const padY = 15;
+        const count = history.length;
+        const stepX = (width - padX * 2) / (count - 1);
+
+        let polylinePoints = "";
+        let circleNodes = "";
+
+        history.forEach((attempt, idx) => {
+          const x = padX + (idx * stepX);
+          const y = (height - padY) - ((attempt.average / 10) * (height - padY * 2));
+          polylinePoints += `${x.toFixed(1)},${y.toFixed(1)} `;
+
+          let dotColor = '#10b981';
+          if (attempt.average < 5.0) dotColor = '#ef4444';
+          else if (attempt.average < 7.5) dotColor = '#f59e0b';
+
+          circleNodes += `
+            <circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4" fill="${dotColor}" stroke="#ffffff" stroke-width="1.5">
+              <title>Sessió #${idx + 1}: ${attempt.average}/10 (${attempt.date})</title>
+            </circle>
+          `;
+        });
+
+        container.innerHTML = `
+          <svg viewBox="0 0 ${width} ${height}" class="w-full h-28 overflow-visible font-sans select-none">
+            <line x1="${padX}" y1="${padY}" x2="${width - padX}" y2="${padY}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2" />
+            <line x1="${padX}" y1="${height / 2}" x2="${width - padX}" y2="${height / 2}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2" />
+            <line x1="${padX}" y1="${height - padY}" x2="${width - padX}" y2="${height - padY}" stroke="#cbd5e1" stroke-width="1.5" />
+            
+            <polyline 
+              fill="none" 
+              stroke="#0284c7" 
+              stroke-width="2.5" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              points="${polylinePoints.trim()}" 
+            />
+            
+            ${circleNodes}
+          </svg>
+        `;
+      },
+
+      exportEvaluationReport({ studentName, caseTitle, schoolName, feedbackHtml, scores, date }) {
+        const filename = `Informe_Feedback_${studentName.replace(/\s+/g, '_')}.doc`;
+        const formattedDate = date || new Date().toLocaleDateString();
+
+        const documentContent = `
+          <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+          <head>
+            <meta charset='utf-8'>
+            <title>Informe d'Avaluació Competencial</title>
+            <style>
+              body { font-family: 'Calibri', 'Arial', sans-serif; font-size: 11pt; line-height: 1.45; color: #1e293b; margin: 20pt; }
+              h1 { color: #075985; font-size: 18pt; margin-bottom: 4pt; border-bottom: 2pt solid #0284c7; padding-bottom: 6pt; }
+              h2 { color: #0369a1; font-size: 14pt; margin-top: 16pt; margin-bottom: 6pt; border-bottom: 1pt solid #cbd5e1; padding-bottom: 3pt; }
+              h3 { color: #0c4a6e; font-size: 12pt; margin-top: 12pt; margin-bottom: 4pt; }
+              .metadata-table { width: 100%; border-collapse: collapse; margin-bottom: 18pt; margin-top: 10pt; }
+              .metadata-table td { padding: 5pt 8pt; border: 1pt solid #cbd5e1; font-size: 10pt; }
+              .meta-label { background-color: #f1f5f9; font-weight: bold; width: 25%; color: #334155; }
+              p { margin: 4pt 0 8pt 0; }
+              ul { margin-top: 4pt; margin-bottom: 8pt; }
+            </style>
+          </head>
+          <body>
+            <h1>Informe d'Avaluació i Feedback Competencial</h1>
+            <table class="metadata-table">
+              <tr>
+                <td class="meta-label">Estudiant / Entrevistador/a:</td>
+                <td><strong>${studentName}</strong></td>
+              </tr>
+              <tr>
+                <td class="meta-label">Situació / Cas:</td>
+                <td>${caseTitle}</td>
+              </tr>
+              <tr>
+                <td class="meta-label">Marc Metodològic:</td>
+                <td>${schoolName}</td>
+              </tr>
+              <tr>
+                <td class="meta-label">Data de la Sessió:</td>
+                <td>${formattedDate}</td>
+              </tr>
+              <tr>
+                <td class="meta-label">Qualificació Mitjana Global:</td>
+                <td><strong>${scores.average} / 10</strong></td>
+              </tr>
+            </table>
+
+            <div class="content-body">
+              ${feedbackHtml}
+            </div>
+          </body>
+          </html>
+        `;
+
+        this._triggerDownload(documentContent, filename);
+      },
+
+      exportTranscript({ studentName, caseTitle, history, date }) {
+        const filename = `Transcripcio_Entrevista_${studentName.replace(/\s+/g, '_')}.doc`;
+        const formattedDate = date || new Date().toLocaleDateString();
+
+        let turnsHtml = '';
+        history.forEach(turn => {
+          if (turn.content === "Finalitzar") return;
+
+          const isUser = turn.role === 'user';
+          const speakerLabel = isUser ? `ENTREVISTADOR/A (${studentName.toUpperCase()})` : 'PERSONATGES / SISTEMA';
+          const safeContent = turn.content.replace(/\n/g, '<br>');
+
+          turnsHtml += `
+            <div style="margin-bottom: 12pt; border-left: 3pt solid ${isUser ? '#0284c7' : '#64748b'}; padding-left: 8pt; background: ${isUser ? '#f0f9ff' : '#f8fafc'}; padding: 6pt 10pt;">
+              <p style="font-size: 9pt; font-weight: bold; color: ${isUser ? '#0369a1' : '#475569'}; margin: 0 0 4pt 0; text-transform: uppercase;">
+                ${speakerLabel}
+              </p>
+              <p style="margin: 0; font-size: 10.5pt; color: #1e293b;">
+                ${safeContent}
+              </p>
+            </div>
+          `;
+        });
+
+        const documentContent = `
+          <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+          <head>
+            <meta charset='utf-8'>
+            <title>Transcripció de la Sessió</title>
+            <style>
+              body { font-family: 'Calibri', 'Arial', sans-serif; font-size: 11pt; line-height: 1.4; color: #1e293b; margin: 20pt; }
+              h1 { color: #0f172a; font-size: 18pt; border-bottom: 2pt solid #0284c7; padding-bottom: 6pt; margin-bottom: 12pt; }
+              .meta-info { font-size: 10pt; color: #64748b; margin-bottom: 16pt; }
+            </style>
+          </head>
+          <body>
+            <h1>Registre Oficial de la Trobada / Entrevista</h1>
+            <div class="meta-info">
+              <p><strong>Entrevistador/a:</strong> ${studentName} | <strong>Cas:</strong> ${caseTitle} | <strong>Data:</strong> ${formattedDate}</p>
+            </div>
+            <hr style="border: 0; border-top: 1pt solid #e2e8f0; margin-bottom: 16pt;" />
+            ${turnsHtml}
+          </body>
+          </html>
+        `;
+
+        this._triggerDownload(documentContent, filename);
+      },
+
+      _triggerDownload(htmlContent, filename) {
+        const blob = new Blob(['\ufeff' + htmlContent], {
+          type: 'application/msword;charset=utf-8'
+        });
+
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(link.href);
+      }
+    };
+
+    const AppState = {
+      activeCase: PREDEFINED_CASES.clinic,
+      activeFramework: PREDEFINED_FRAMEWORKS.clinic,
+      studentName: 'Estudiant',
+      provider: 'gemini',
+      model: 'gemini-2.5-flash',
+      apiKey: '',
+      history: [],
+      rawFeedback: '',
+      parsedScores: null,
+      sessionDate: ''
+    };
+
+    const CaseLoader = {
+      loadPreset(key) {
+        const cas = PREDEFINED_CASES[key];
+        const framework = PREDEFINED_FRAMEWORKS[key];
+        if (!cas || !framework) return;
+
+        AppState.activeCase = JSON.parse(JSON.stringify(cas));
+        AppState.activeFramework = JSON.parse(JSON.stringify(framework));
+
+        document.querySelectorAll('.preset-btn').forEach(btn => {
+          btn.className = "preset-btn p-3 rounded-xl border border-slate-200 hover:border-slate-300 bg-white text-left transition-all";
+        });
+        const activeBtn = document.getElementById(`btn-preset-${key}`);
+        if (activeBtn) {
+          activeBtn.className = "preset-btn p-3 rounded-xl border text-left transition-all relative border-brand-500 bg-brand-50/70 shadow-xs";
+        }
+
+        document.getElementById('file-case-status').textContent = `Carregat: Exemple ${key.toUpperCase()}`;
+        document.getElementById('file-framework-status').textContent = `Carregat: Exemple ${key.toUpperCase()}`;
+
+        this.updatePreviewCard();
+      },
+
+      handleCaseFileUpload(event) {
+        const file = event.target.files?.[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          try {
+            const data = JSON.parse(e.target.result);
+            if (!data.id || !data.titol || !data.personatges || !data.briefing_inicial) {
+              throw new Error("L'esquema del fitxer JSON no compleix amb la definició MOD-01.");
+            }
+            AppState.activeCase = data;
+            document.getElementById('file-case-status').textContent = `✓ ${file.name}`;
+            document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('border-brand-500', 'bg-brand-50/70'));
+            this.updatePreviewCard();
+            alert(`Fitxa de cas "${data.titol}" carregada correctament.`);
+          } catch (err) {
+            alert("Error en llegir el fitxer de cas: " + err.message);
+          }
+        };
+        reader.readAsText(file);
+      },
+
+      handleFrameworkFileUpload(event) {
+        const file = event.target.files?.[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          try {
+            const data = JSON.parse(e.target.result);
+            if (!data.escola_id || !data.nom || !data.dimensions_avaluacio) {
+              throw new Error("L'esquema del fitxer JSON no compleix amb la definició MOD-02.");
+            }
+            AppState.activeFramework = data;
+            document.getElementById('file-framework-status').textContent = `✓ ${file.name}`;
+            this.updatePreviewCard();
+            alert(`Marc teòric "${data.nom}" carregat correctament.`);
+          } catch (err) {
+            alert("Error en llegir el fitxer de marc teòric: " + err.message);
+          }
+        };
+        reader.readAsText(file);
+      },
+
+      updatePreviewCard() {
+        const cas = AppState.activeCase;
+        const framework = AppState.activeFramework;
+
+        document.getElementById('preview-ambit-badge').textContent = (cas.ambit || 'GENERAL').toUpperCase();
+        document.getElementById('preview-characters-count').textContent = `${cas.personatges.length} personatges`;
+        document.getElementById('preview-case-title').textContent = cas.titol;
+        document.getElementById('preview-framework-name').innerHTML = `Marc: <span class="font-semibold text-slate-800">${framework.nom}</span>`;
+
+        const tagsContainer = document.getElementById('preview-characters-tags');
+        tagsContainer.innerHTML = '';
+        cas.personatges.forEach(p => {
+          const colorKey = p.color || 'slate';
+          const palette = COLOR_PALETTES[colorKey] || COLOR_PALETTES.slate;
+          const badge = document.createElement('span');
+          badge.className = `inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold ${palette.badge}`;
+          badge.textContent = `${p.nom} (${p.avatar_tag || 'PER'})`;
+          tagsContainer.appendChild(badge);
+        });
+      }
+    };
+
+    const AIProviderManager = {
+      init() {
+        const savedStudent = localStorage.getItem('universal_student_name');
+        if (savedStudent) {
+          document.getElementById('student-name').value = savedStudent;
+          AppState.studentName = savedStudent;
+        }
+
+        const savedProvider = localStorage.getItem('universal_active_provider') || 'gemini';
+        document.getElementById('ai-provider').value = savedProvider;
+        this.onProviderChanged();
+      },
+
+      onProviderChanged() {
+        const provider = document.getElementById('ai-provider').value;
+        AppState.provider = provider;
+        localStorage.setItem('universal_active_provider', provider);
+
+        const modelSelect = document.getElementById('ai-model');
+        modelSelect.innerHTML = '';
+        const models = UniversalApiClient.MODELS[provider] || [];
+        models.forEach(m => {
+          const opt = document.createElement('option');
+          opt.value = m.id;
+          opt.textContent = m.name;
+          if (m.default) opt.selected = true;
+          modelSelect.appendChild(opt);
+        });
+
+        const savedKey = UniversalApiClient.getApiKey(provider);
+        document.getElementById('api-key').value = savedKey;
+
+        const corsNotice = document.getElementById('cors-notice');
+        if (provider === 'mistral') {
+          corsNotice.classList.remove('hidden');
+        } else {
+          corsNotice.classList.add('hidden');
+        }
+      },
+
+      forgetKey() {
+        const provider = document.getElementById('ai-provider').value;
+        localStorage.removeItem(`universal_api_key_${provider}`);
+        document.getElementById('api-key').value = '';
+        AppState.apiKey = '';
+        alert(`S'ha esborrat la clau de ${provider.toUpperCase()} d'aquest navegador.`);
+      },
+
+      toggleKeyVisibility() {
+        const keyInput = document.getElementById('api-key');
+        if (keyInput.type === 'password') {
+          keyInput.type = 'text';
+        } else {
+          keyInput.type = 'password';
+        }
+      },
+
+      saveCurrentSettings() {
+        const studentName = document.getElementById('student-name').value.trim() || 'Estudiant';
+        const provider = document.getElementById('ai-provider').value;
+        const model = document.getElementById('ai-model').value;
+        const apiKey = document.getElementById('api-key').value.trim();
+
+        AppState.studentName = studentName;
+        AppState.provider = provider;
+        AppState.model = model;
+        AppState.apiKey = apiKey;
+
+        localStorage.setItem('universal_student_name', studentName);
+        UniversalApiClient.saveApiKey(provider, apiKey);
+      }
+    };
+
+    const UIController = {
+      goToView(viewId) {
+        document.getElementById('view-setup').classList.add('hidden');
+        document.getElementById('view-briefing').classList.add('hidden');
+        document.getElementById('view-simulation').classList.add('hidden');
+        document.getElementById('view-feedback').classList.add('hidden');
+
+        const target = document.getElementById(`view-${viewId}`);
+        if (target) target.classList.remove('hidden');
+
+        const headerBadge = document.getElementById('header-status-badge');
+        const headerStatus = document.getElementById('header-status-text');
+
+        if (viewId === 'setup') {
+          headerStatus.textContent = 'Configuració';
+          headerBadge.className = "hidden sm:inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200";
+        } else if (viewId === 'briefing') {
+          headerStatus.textContent = 'Briefing';
+          headerBadge.className = "hidden sm:inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200";
+        } else if (viewId === 'simulation') {
+          headerStatus.textContent = 'Simulació en Viu';
+          headerBadge.className = "hidden sm:inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200";
+        } else if (viewId === 'feedback') {
+          headerStatus.textContent = 'Avaluació & Feedback';
+          headerBadge.className = "hidden sm:inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200";
+        }
+      },
+
+      goToBriefing() {
+        AIProviderManager.saveCurrentSettings();
+
+        if (!AppState.apiKey) {
+          alert(`Si us plau, introdueix la clau d'API per al proveïdor ${AppState.provider.toUpperCase()} abans de començar.`);
+          document.getElementById('api-key').focus();
+          return;
+        }
+
+        const cas = AppState.activeCase;
+        const framework = AppState.activeFramework;
+
+        document.getElementById('briefing-ambit-badge').textContent = (cas.ambit || 'GENERAL').toUpperCase();
+        document.getElementById('briefing-title').textContent = cas.titol;
+        document.getElementById('briefing-demanda').textContent = cas.briefing_inicial.demanda_manifesta;
+        document.getElementById('briefing-context').textContent = cas.briefing_inicial.context_obert;
+        document.getElementById('briefing-observacio').textContent = `"${cas.briefing_inicial.observacio_analogica}"`;
+
+        const charContainer = document.getElementById('briefing-characters-list');
+        charContainer.innerHTML = '';
+        cas.personatges.forEach(p => {
+          const colorKey = p.color || 'slate';
+          const palette = COLOR_PALETTES[colorKey] || COLOR_PALETTES.slate;
+          const card = document.createElement('div');
+          card.className = "bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-2";
+          card.innerHTML = `
+            <div class="flex items-center space-x-2.5">
+              <div class="w-8 h-8 rounded-full ${palette.avatar} flex items-center justify-center text-[10px] font-bold">
+                ${p.avatar_tag || 'PER'}
+              </div>
+              <div>
+                <h4 class="font-bold text-xs text-slate-900">${p.nom}</h4>
+                <p class="text-[11px] text-slate-500">${p.rol}</p>
+              </div>
+            </div>
+            <div class="text-[11px] text-slate-600 space-y-1 pt-1 border-t border-slate-100">
+              <p><strong>Estil:</strong> ${p.estil_comunicatiu}</p>
+              <p><strong>Accessible:</strong> ${p.informacio_accessible}</p>
+            </div>
+          `;
+          charContainer.appendChild(card);
+        });
+
+        document.getElementById('briefing-school-name').textContent = framework.nom;
+        document.getElementById('briefing-supervisor-role').textContent = framework.criteris_copilot.rol_supervisor;
+
+        const dimList = document.getElementById('briefing-dimensions-list');
+        dimList.innerHTML = '';
+        framework.dimensions_avaluacio.forEach(dim => {
+          const li = document.createElement('li');
+          li.className = "flex items-start space-x-1.5";
+          li.innerHTML = `<span class="text-indigo-500 font-bold">•</span> <span><strong>${dim.nom}:</strong> ${dim.indicadors.join(', ')}</span>`;
+          dimList.appendChild(li);
+        });
+
+        this.goToView('briefing');
+      },
+
+      setSidebarTab(tab) {
+        const btnCase = document.getElementById('tab-case-btn');
+        const btnCopilot = document.getElementById('tab-copilot-btn');
+        const viewCase = document.getElementById('tab-case-content');
+        const viewCopilot = document.getElementById('tab-copilot-content');
+
+        if (tab === 'case') {
+          btnCase.className = "flex-1 py-3 text-center border-b-2 border-brand-600 text-brand-600 bg-slate-50 font-bold text-xs transition-colors";
+          btnCopilot.className = "flex-1 py-3 text-center border-b-2 border-transparent text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors font-medium text-xs flex items-center justify-center space-x-1";
+          viewCase.classList.remove('hidden');
+          viewCopilot.classList.add('hidden');
+        } else {
+          btnCopilot.className = "flex-1 py-3 text-center border-b-2 border-brand-600 text-brand-600 bg-slate-50 font-bold text-xs flex items-center justify-center space-x-1 transition-colors";
+          btnCase.className = "flex-1 py-3 text-center border-b-2 border-transparent text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors font-medium text-xs";
+          viewCase.classList.add('hidden');
+          viewCopilot.classList.remove('hidden');
+        }
+      },
+
+      exportCurrentHTMLFile() {
+        const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+        const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'simulador_universal.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(a.href);
+      }
+    };
+
+    const SimulationEngine = {
+      isProcessing: false,
+
+      startSimulation() {
+        const cas = AppState.activeCase;
+        const framework = AppState.activeFramework;
+
+        AppState.history = [];
+        AppState.sessionDate = new Date().toLocaleDateString();
+
+        document.getElementById('sim-session-case-title').textContent = cas.titol;
+        document.getElementById('sim-session-student').textContent = AppState.studentName;
+        document.getElementById('sim-session-model').textContent = `${AppState.provider.toUpperCase()} (${AppState.model})`;
+
+        const optLabel = framework.eina_reformulacio?.nom_boto || "✨ Reformular";
+        document.getElementById('label-optimize-btn').textContent = optLabel;
+
+        const targetSelect = document.getElementById('chat-target-select');
+        targetSelect.innerHTML = '<option value="A tots / General">A tots / General</option>';
+        cas.personatges.forEach(p => {
+          const opt = document.createElement('option');
+          opt.value = p.nom;
+          opt.textContent = `${p.nom} (${p.rol})`;
+          targetSelect.appendChild(opt);
+        });
+
+        document.getElementById('sidebar-case-obs').textContent = `"${cas.briefing_inicial.observacio_analogica}"`;
+        document.getElementById('sidebar-case-demand').innerHTML = `<strong>Demanda:</strong> ${cas.briefing_inicial.demanda_manifesta}<br><br><strong>Context:</strong> ${cas.briefing_inicial.context_obert}`;
+
+        const sidebarChars = document.getElementById('sidebar-characters-list');
+        sidebarChars.innerHTML = '';
+        cas.personatges.forEach(p => {
+          const colorKey = p.color || 'slate';
+          const palette = COLOR_PALETTES[colorKey] || COLOR_PALETTES.slate;
+          const div = document.createElement('div');
+          div.className = "p-2 rounded-lg bg-slate-50 border border-slate-100 flex items-start space-x-2";
+          div.innerHTML = `
+            <span class="w-6 h-6 rounded-full ${palette.avatar} flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5">
+              ${p.avatar_tag || 'PER'}
+            </span>
+            <div class="text-[11px] leading-tight">
+              <span class="font-bold text-slate-800">${p.nom}</span> <span class="text-slate-500">(${p.rol})</span>
+              <p class="text-slate-600 text-[10px] mt-0.5">${p.estil_comunicatiu}</p>
+            </div>
+          `;
+          sidebarChars.appendChild(div);
+        });
+
+        document.getElementById('sidebar-school-title').textContent = framework.nom;
+        document.getElementById('sidebar-school-dimensions').textContent = `${framework.dimensions_avaluacio.length} dimensions competencials configurades.`;
+        document.getElementById('copilot-role-desc').textContent = framework.criteris_copilot.rol_supervisor;
+
+        const feed = document.getElementById('chat-messages-feed');
+        feed.innerHTML = '';
+
+        UIEngine.renderSystemNotice(feed, `Porta oberta. Els participants s'han assegut a la sala segons l'observació analògica.`);
+
+        this.triggerInitialGreeting();
+        UIController.goToView('simulation');
+      },
+
+      async triggerInitialGreeting() {
+        const feed = document.getElementById('chat-messages-feed');
+        const typing = document.getElementById('chat-typing-indicator');
+        typing.classList.remove('hidden');
+        document.getElementById('typing-indicator-text').textContent = "Els personatges entren i s'acomoden...";
+
+        const systemPrompt = PromptEngine.getSimulationSystemPrompt(AppState.activeCase, AppState.activeFramework);
+        const greetingTrigger = [
+          {
+            role: 'user',
+            content: `[L'entrevistador/a ${AppState.studentName} obre la porta de la sala, saluda breument i us convida a prendre seient per començar la trobada.]`
+          }
+        ];
+
+        try {
+          const response = await UniversalApiClient.sendMessage({
+            provider: AppState.provider,
+            apiKey: AppState.apiKey,
+            model: AppState.model,
+            systemPrompt: systemPrompt,
+            messages: greetingTrigger
+          });
+
+          AppState.history.push(greetingTrigger[0]);
+          AppState.history.push({ role: 'assistant', content: response });
+
+          UIEngine.renderCoralResponse(response, AppState.activeCase, feed);
+        } catch (err) {
+          const errorObj = UniversalApiClient.formatUserFriendlyError(err, AppState.provider);
+          UIEngine.renderError(feed, errorObj, () => this.triggerInitialGreeting());
+        } finally {
+          typing.classList.add('hidden');
+        }
+      },
+
+      async handleSendMessage(e) {
+        e.preventDefault();
+        if (this.isProcessing) return;
+
+        const inputEl = document.getElementById('chat-input');
+        const text = inputEl.value.trim();
+        if (!text) return;
+
+        const targetSelect = document.getElementById('chat-target-select');
+        const targetName = targetSelect.value;
+
+        inputEl.value = '';
+        this.isProcessing = true;
+
+        const feed = document.getElementById('chat-messages-feed');
+        const typing = document.getElementById('chat-typing-indicator');
+
+        const fullUserMessage = targetName !== "A tots / General" 
+          ? `(Dirigit a ${targetName}): ${text}` 
+          : text;
+
+        UIEngine.renderUserMessage(feed, text, targetName, AppState.studentName);
+        AppState.history.push({ role: 'user', content: fullUserMessage });
+
+        typing.classList.remove('hidden');
+        document.getElementById('typing-indicator-text').textContent = "Els personatges estan contestant...";
+
+        try {
+          const systemPrompt = PromptEngine.getSimulationSystemPrompt(AppState.activeCase, AppState.activeFramework);
+          const response = await UniversalApiClient.sendMessage({
+            provider: AppState.provider,
+            apiKey: AppState.apiKey,
+            model: AppState.model,
+            systemPrompt: systemPrompt,
+            messages: AppState.history
+          });
+
+          AppState.history.push({ role: 'assistant', content: response });
+          UIEngine.renderCoralResponse(response, AppState.activeCase, feed);
+        } catch (err) {
+          const errorObj = UniversalApiClient.formatUserFriendlyError(err, AppState.provider);
+          UIEngine.renderError(feed, errorObj, () => {
+            this.handleSendMessage({ preventDefault: () => {} });
+          });
+        } finally {
+          this.isProcessing = false;
+          typing.classList.add('hidden');
+          inputEl.focus();
+        }
+      },
+
+      async handleOptimizeIntervention() {
+        const inputEl = document.getElementById('chat-input');
+        const userDraft = inputEl.value.trim();
+
+        if (!userDraft) {
+          alert("Si us plau, escriu primer una proposta d'intervenció o pregunta al camp de text per poder optimitzar-la.");
+          inputEl.focus();
+          return;
+        }
+
+        const btn = document.getElementById('btn-optimize');
+        const originalText = btn.innerHTML;
+        btn.disabled = true;
+        btn.classList.add('opacity-50', 'cursor-not-allowed');
+        btn.innerHTML = `<span>⏳ Optimitzant...</span>`;
+
+        try {
+          const prompt = PromptEngine.getOptimizationPrompt(AppState.activeCase, AppState.activeFramework, userDraft);
+          const reformulacio = await UniversalApiClient.sendMessage({
+            provider: AppState.provider,
+            apiKey: AppState.apiKey,
+            model: AppState.model,
+            systemPrompt: prompt,
+            messages: AppState.history.length > 0 ? AppState.history : [{ role: 'user', content: userDraft }]
+          });
+
+          inputEl.value = reformulacio.replace(/^["']|["']$/g, '').trim();
+          inputEl.focus();
+        } catch (err) {
+          const errorObj = UniversalApiClient.formatUserFriendlyError(err, AppState.provider);
+          alert(`No s'ha pogut reformular la intervenció: ${errorObj.title}\n${errorObj.details}`);
+        } finally {
+          btn.disabled = false;
+          btn.classList.remove('opacity-50', 'cursor-not-allowed');
+          btn.innerHTML = originalText;
+        }
+      },
+
+      async requestCopilotHypothesis() {
+        if (AppState.history.length < 2) {
+          alert("Cal mantenir almenys un intercanvi de diàleg amb els personatges per poder generar una hipòtesi fonamentada.");
+          return;
+        }
+        this._executeCopilotAction("Hipòtesi de Treball Metodològica", () => 
+          PromptEngine.getHypothesisPrompt(AppState.activeCase, AppState.activeFramework)
+        );
+      },
+
+      async requestCopilotNeutrality() {
+        if (AppState.history.length < 2) {
+          alert("Cal fer algunes intervencions abans d'avaluar la neutralitat i l'equidistància.");
+          return;
+        }
+        this._executeCopilotAction("Avaluació de Neutralitat i Aliances", () => 
+          PromptEngine.getNeutralityPrompt(AppState.activeCase, AppState.activeFramework)
+        );
+      },
+
+      async requestCopilotQuery() {
+        const input = document.getElementById('copilot-query-input');
+        const query = input.value.trim();
+        if (!query) {
+          alert("Escriu una consulta per al supervisor docent.");
+          return;
+        }
+        input.value = '';
+        this._executeCopilotAction(`Consulta: "${query}"`, () => 
+          PromptEngine.getSupervisorQueryPrompt(AppState.activeCase, AppState.activeFramework, query)
+        );
+      },
+
+      async _executeCopilotAction(title, promptGetter) {
+        const box = document.getElementById('copilot-response-box');
+        const titleEl = document.getElementById('copilot-response-title');
+        const textEl = document.getElementById('copilot-response-text');
+
+        box.classList.remove('hidden');
+        titleEl.textContent = `🎓 ${title}`;
+        textEl.innerHTML = `<span class="text-indigo-600 font-semibold animate-pulse">El supervisor està analitzant la trobada...</span>`;
+
+        try {
+          const prompt = promptGetter();
+          const response = await UniversalApiClient.sendMessage({
+            provider: AppState.provider,
+            apiKey: AppState.apiKey,
+            model: AppState.model,
+            systemPrompt: prompt,
+            messages: AppState.history
+          });
+
+          textEl.innerHTML = response.replace(/\n/g, '<br>');
+        } catch (err) {
+          const errorObj = UniversalApiClient.formatUserFriendlyError(err, AppState.provider);
+          textEl.innerHTML = `<span class="text-red-600 font-bold">Error: ${errorObj.title}</span><br><span class="text-xs text-red-500">${errorObj.details}</span>`;
+        }
+      },
+
+      confirmEndSession() {
+        if (confirm("Vols finalitzar definitivament aquesta sessió de trobada i accedir a l'informe d'avaluació i feedback competencial?")) {
+          FeedbackEngine.generateFinalFeedback();
+        }
+      }
+    };
+
+    const FeedbackEngine = {
+      async generateFinalFeedback() {
+        UIController.goToView('feedback');
+
+        document.getElementById('feedback-student-name').textContent = AppState.studentName;
+        document.getElementById('feedback-case-title').textContent = AppState.activeCase.titol;
+        document.getElementById('feedback-date-text').textContent = AppState.sessionDate || new Date().toLocaleDateString();
+        document.getElementById('chart-student-label').textContent = AppState.studentName;
+
+        const qualitativeContainer = document.getElementById('feedback-qualitative-content');
+        qualitativeContainer.innerHTML = `
+          <div class="py-12 text-center space-y-4">
+            <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-brand-600 border-t-transparent"></div>
+            <h4 class="font-bold text-slate-800 text-base">Generant l'informe d'avaluació competencial...</h4>
+            <p class="text-xs text-slate-500 max-w-md mx-auto">
+              El model d'IA està analitzant la transcripció completa segons les 5 dimensions de la rúbrica i assignant les qualificacions.
+            </p>
+          </div>
+        `;
+
+        try {
+          const prompt = PromptEngine.getFeedbackPrompt(AppState.activeCase, AppState.activeFramework);
+          const feedbackText = await UniversalApiClient.sendMessage({
+            provider: AppState.provider,
+            apiKey: AppState.apiKey,
+            model: AppState.model,
+            systemPrompt: prompt,
+            messages: [
+              ...AppState.history,
+              { role: 'user', content: "Finalitzar entrevista i generar informe d'avaluació." }
+            ]
+          });
+
+          AppState.rawFeedback = feedbackText;
+
+          const parsed = AnalyticsExportEngine.parseDynamicScores(feedbackText, AppState.activeFramework);
+          AppState.parsedScores = parsed;
+
+          document.getElementById('badge-average-score').textContent = `Mitjana: ${parsed.average} / 10`;
+          const avgTheme = getScoreTheme(parsed.average);
+          document.getElementById('badge-average-score').className = `px-2.5 py-1 rounded-xl text-xs font-black ${avgTheme.badge}`;
+
+          AnalyticsExportEngine.renderCompetencyDashboard(
+            'competencies-dashboard-container', 
+            parsed, 
+            AppState.activeFramework
+          );
+
+          const history = AnalyticsExportEngine.saveAttemptHistory(
+            AppState.studentName, 
+            AppState.activeCase.id, 
+            parsed
+          );
+          AnalyticsExportEngine.renderProgressChart('svg-chart-container', history);
+
+          this.renderFormattedFeedback(feedbackText, qualitativeContainer);
+
+        } catch (err) {
+          const errorObj = UniversalApiClient.formatUserFriendlyError(err, AppState.provider);
+          qualitativeContainer.innerHTML = `
+            <div class="p-6 bg-red-50 border border-red-200 rounded-2xl text-red-950 space-y-3">
+              <h4 class="font-bold text-base text-red-800">⚠️ Incidència en generar el feedback</h4>
+              <p class="text-xs leading-relaxed">${errorObj.details}</p>
+              <p class="text-xs bg-white/70 p-2.5 rounded-lg border border-red-100"><strong>Suggeriment:</strong> ${errorObj.solution}</p>
+              <button onclick="FeedbackEngine.generateFinalFeedback()" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs rounded-xl shadow-xs transition-colors">
+                Reintentar Avaluació
+              </button>
+            </div>
+          `;
+        }
+      },
+
+      renderFormattedFeedback(rawText, container) {
+        let cleanText = rawText.replace(/\[PUNTUACIONS\][\s\S]*?\[\/PUNTUACIONS\]/i, '').trim();
+
+        let html = cleanText
+          .replace(/^### (.*$)/gim, '<h3 class="text-sm font-bold text-slate-900 mt-4 mb-2 pb-1 border-b border-slate-100">$1</h3>')
+          .replace(/^## (.*$)/gim, '<h2 class="text-base font-extrabold text-brand-900 mt-6 mb-3 pb-1 border-b border-brand-100 flex items-center space-x-1"><span>📌</span><span>$1</span></h2>')
+          .replace(/^# (.*$)/gim, '<h1 class="text-lg font-black text-slate-900 mt-2 mb-4">$1</h1>')
+          .replace(/\*\*(.*?)\*\*/gim, '<strong class="font-bold text-slate-900">$1</strong>')
+          .replace(/\*(.*?)\*/gim, '<em class="italic text-slate-700">$1</em>')
+          .replace(/^- (.*$)/gim, '<li class="ml-4 list-disc text-xs sm:text-sm text-slate-700 leading-relaxed">$1</li>')
+          .replace(/\n\n/gim, '</p><p class="text-xs sm:text-sm text-slate-700 leading-relaxed my-2">')
+          .replace(/\n/gim, '<br>');
+
+        container.innerHTML = `<div class="space-y-3 text-slate-800 leading-relaxed">${html}</div>`;
+      },
+
+      exportWordReport() {
+        if (!AppState.rawFeedback) {
+          alert("Cal generar l'avaluació abans de descarregar l'informe.");
+          return;
+        }
+
+        const qualitativeHtml = document.getElementById('feedback-qualitative-content').innerHTML;
+
+        AnalyticsExportEngine.exportEvaluationReport({
+          studentName: AppState.studentName,
+          caseTitle: AppState.activeCase.titol,
+          schoolName: AppState.activeFramework.nom,
+          feedbackHtml: qualitativeHtml,
+          scores: AppState.parsedScores || { average: 5.0 },
+          date: AppState.sessionDate
+        });
+      },
+
+      exportWordTranscript() {
+        if (!AppState.history || AppState.history.length === 0) {
+          alert("No hi ha transcripció disponible per exportar.");
+          return;
+        }
+
+        AnalyticsExportEngine.exportTranscript({
+          studentName: AppState.studentName,
+          caseTitle: AppState.activeCase.titol,
+          history: AppState.history,
+          date: AppState.sessionDate
+        });
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      AIProviderManager.init();
+      CaseLoader.loadPreset('clinic');
+    });
+  </script>
+
+
+</body></html>
