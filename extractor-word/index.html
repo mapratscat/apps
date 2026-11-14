@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assistent de Secretaria - Extractor de Word a Docs</title>
+  <!-- Tailwind CSS per al disseny net i adaptatiu -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Mammoth.js per convertir documents .docx reals a HTML al navegador -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+  <!-- Llibreria per generar fitxers Word (.docx) directament des del navegador -->
+  <script src="https://cdn.jsdelivr.net/npm/html-docx-js@0.3.1/dist/html-docx.js"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    /* Estils de vista prèvia del document */
+    .doc-preview h1 { font-size: 1.5rem; font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem; color: #0f172a; }
+    .doc-preview h2 { font-size: 1.25rem; font-weight: 600; margin-top: 0.85rem; margin-bottom: 0.4rem; color: #1e293b; }
+    .doc-preview h3 { font-size: 1.1rem; font-weight: 600; margin-top: 0.75rem; margin-bottom: 0.3rem; color: #334155; }
+    .doc-preview p { margin-bottom: 0.75rem; line-height: 1.6; color: #334155; }
+    .doc-preview ul { list-style-type: disc; margin-left: 1.25rem; margin-bottom: 0.75rem; }
+    .doc-preview ol { list-style-type: decimal; margin-left: 1.25rem; margin-bottom: 0.75rem; }
+    .doc-preview table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+    .doc-preview table td, .doc-preview table th { border: 1px solid #cbd5e1; padding: 6px 10px; }
+    .doc-preview table th { background: #f8fafc; font-weight: 600; }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold text-slate-900 leading-tight">DocuExtract Secretaria</h1>
+          <p class="text-xs text-slate-500 font-medium">Extracció ràpida de Word (.docx) a Google Docs</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium text-emerald-800 bg-emerald-50 rounded-full border border-emerald-200" title="El document es processa dins del navegador i no s'envia a cap servidor">
+          <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          Funciona localment al navegador
+        </span>
+        <button id="btn-sample-doc" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-lg border border-blue-200 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          Provar amb document de mostra
+        </button>
+        <button id="btn-help-modal" class="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition" title="Com s'utilitza?">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 flex flex-col gap-6">
+    <!-- Indicador de passes per a la secretària -->
+    <section class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div id="step-badge-1" class="flex items-center gap-3 p-2.5 rounded-xl bg-blue-50/70 border border-blue-200/80 transition-all">
+          <div class="w-7 h-7 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-xs shrink-0">1</div>
+          <div class="min-w-0">
+            <p class="text-xs font-semibold text-blue-900">Pujar Word (.docx)</p>
+            <p class="text-[11px] text-blue-700/80 truncate">Carrega o arrossega el fitxer</p>
+          </div>
+        </div>
+
+        <div id="step-badge-2" class="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200 transition-all opacity-70">
+          <div class="w-7 h-7 rounded-lg bg-slate-400 text-white flex items-center justify-center font-bold text-xs shrink-0">2</div>
+          <div class="min-w-0">
+            <p class="text-xs font-semibold text-slate-800">Definir secció</p>
+            <p class="text-[11px] text-slate-500 truncate">Escriure o triar a l'índex</p>
+          </div>
+        </div>
+
+        <div id="step-badge-3" class="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200 transition-all opacity-70">
+          <div class="w-7 h-7 rounded-lg bg-slate-400 text-white flex items-center justify-center font-bold text-xs shrink-0">3</div>
+          <div class="min-w-0">
+            <p class="text-xs font-semibold text-slate-800">Passar a Docs / Word</p>
+            <p class="text-[11px] text-slate-500 truncate">Google Docs o descarregar Word</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 items-start">
+      <!-- Columna Esquerra: Carregar fitxer i Taula de Seccions -->
+      <section class="lg:col-span-4 flex flex-col gap-5">
+        <!-- Zona de càrrega de fitxers -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+              Document d'origen
+            </h2>
+            <span id="file-size-badge" class="hidden text-[11px] font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">0 KB</span>
+          </div>
+
+          <!-- Drag and drop box -->
+          <div id="drop-zone" class="border-2 border-dashed border-slate-300 hover:border-blue-500 bg-slate-50 hover:bg-blue-50/40 rounded-xl p-6 text-center cursor-pointer transition flex flex-col items-center justify-center gap-2">
+            <input type="file" id="file-input" accept=".docx" class="hidden" />
+            <div class="w-12 h-12 rounded-full bg-blue-100/70 text-blue-600 flex items-center justify-center">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs font-semibold text-slate-700">Fes clic o arrossega un fitxer <span class="text-blue-600 font-bold">.docx</span></p>
+              <p class="text-[11px] text-slate-400 mt-0.5">Compatible amb Microsoft Word estàndard</p>
+            </div>
+          </div>
+
+          <!-- Fitxer actual carregat -->
+          <div id="file-loaded-info" class="hidden items-center justify-between p-3 bg-blue-50/60 border border-blue-200 rounded-xl">
+            <div class="flex items-center gap-2.5 overflow-hidden">
+              <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0 text-xs font-bold">W</div>
+              <div class="min-w-0">
+                <p id="loaded-filename" class="text-xs font-semibold text-slate-900 truncate">document.docx</p>
+                <p id="loaded-wordcount" class="text-[10px] text-slate-500">0 paraules trobades</p>
+              </div>
+            </div>
+            <button id="btn-remove-file" class="text-slate-400 hover:text-red-500 p-1 rounded-lg transition" title="Treure document">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Seccions detectades automàticament al document -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              Seccions trobades al Word
+            </h2>
+            <span id="sections-count" class="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-semibold">0</span>
+          </div>
+          <p class="text-xs text-slate-500">Fes clic directe sobre qualsevol apartat per extreure'l a l'instant:</p>
+          
+          <div id="sections-list" class="max-h-60 overflow-y-auto custom-scrollbar flex flex-col gap-1.5 pr-1 text-xs">
+            <div class="p-4 text-center text-slate-400 italic bg-slate-50 rounded-xl border border-dashed border-slate-200">
+              Encara no s'ha carregat cap document.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lg:col-span-8 flex flex-col gap-5">
+        <!-- Caixa de criteris de selecció (formulari intel·ligent) -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col gap-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <h2 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+              Quina part o secció vols extreure?
+            </h2>
+            <span class="text-xs text-slate-500">Escriu el número o el nom de l'apartat</span>
+          </div>
+
+          <!-- Suggeriments ràpids freqüents a secretaria -->
+          <div class="flex flex-wrap gap-1.5 text-xs">
+            <span class="text-slate-400 py-1 text-[11px] font-medium mr-1">Suggeriments ràpids:</span>
+            <button class="quick-filter-btn px-2.5 py-1 rounded-lg bg-blue-100/70 hover:bg-blue-200 text-blue-900 font-semibold border border-blue-300 transition" data-query="Només els acords de la taula amb A en negreta">
+              ⭐ Acords Equip Directiu (Taula [A])
+            </button>
+            <button class="quick-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-700 font-medium transition" data-query="Només els acords i conclusions">Acords i conclusions</button>
+            <button class="quick-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-700 font-medium transition" data-query="L'apartat 2">Apartat 2</button>
+            <button class="quick-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-700 font-medium transition" data-query="Tots els punts de l'ordre del dia">Ordre del dia</button>
+          </div>
+
+          <!-- Formulari d'instrucció -->
+          <div class="relative flex flex-col sm:flex-row gap-2">
+            <div class="relative flex-1">
+              <input type="text" id="extraction-query" placeholder="Ex: 'Extreu des del punt 2 fins al final', 'Només la introducció' o 'L'acta sencera'..." class="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition">
+              <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+            <button id="btn-extract" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition shadow-sm shadow-blue-500/30">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"></path>
+              </svg>
+              Extreure secció
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col overflow-hidden">
+          <!-- Barra superior amb pestanyes i botons de Google Docs -->
+          <div class="px-5 py-3.5 bg-slate-50/80 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <button id="tab-extracted" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-700 border border-slate-200 shadow-sm transition">
+                Fragment extret (Google Docs)
+              </button>
+              <button id="tab-original" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition">
+                Document Word complet
+              </button>
+            </div>
+
+            <!-- Botons d'acció directes per a la secretària -->
+            <div class="flex items-center gap-2">
+              <button id="btn-copy-docs" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm transition" title="Copia el text amb el format net">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                </svg>
+                Copiar formatat
+              </button>
+
+              <button id="btn-download-word" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-700 hover:bg-blue-800 text-white text-xs font-semibold shadow-sm transition" title="Generar i descarregar directament un fitxer Word (.docx) amb la selecció">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+                Descarregar Word (.docx)
+              </button>
+
+              <button id="btn-open-gdocs" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-sm transition" title="Obre un nou document buit a Google Docs per enganxar-hi el contingut">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                </svg>
+                Obrir a Google Docs
+              </button>
+
+              <div class="relative inline-block text-left" id="gdocs-account-selector">
+                <select id="select-authuser" class="text-[11px] font-medium text-slate-600 bg-white border border-slate-200 rounded-lg px-2 py-1.5 focus:outline-none focus:border-blue-500 cursor-pointer" title="Selecciona amb quin compte de Google vols obrir el document">
+                  <option value="0">Compte Google principal</option>
+                  <option value="1">Compte Google secundari (ex. institucional)</option>
+                </select>
+              </div>
+
+              <button id="btn-download-html" class="p-1.5 text-slate-500 hover:text-slate-800 hover:bg-slate-200 rounded-lg transition" title="Descarregar fitxer com a document HTML net">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Estat de l'extracció -->
+          <div id="extraction-status-banner" class="hidden px-5 py-2.5 bg-blue-50 border-b border-blue-100 flex items-center justify-between text-xs text-blue-800">
+            <span id="extraction-status-text">Criteri aplicat: Apartat 2</span>
+            <span id="extraction-stats" class="text-[11px] font-semibold text-blue-600">0 paraules extretes</span>
+          </div>
+
+          <!-- Àrea de contingut i vista prèvia -->
+          <div class="p-6 min-h-[380px] max-h-[550px] overflow-y-auto custom-scrollbar">
+            <!-- Vista de text extret -->
+            <div id="view-extracted" class="doc-preview">
+              <div id="extracted-placeholder" class="h-64 flex flex-col items-center justify-center text-center text-slate-400 gap-3">
+                <div class="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-300">
+                  <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-slate-600">Cap secció extreta encara</p>
+                  <p class="text-xs text-slate-400 mt-0.5">Carrega un fitxer i indica quina part necessites (o fes clic a "Document de mostra" per provar-ho)</p>
+                </div>
+              </div>
+              <div id="extracted-content" class="hidden"></div>
+            </div>
+
+            <!-- Vista del document sencer -->
+            <div id="view-original" class="doc-preview hidden">
+              <div id="original-placeholder" class="h-64 flex flex-col items-center justify-center text-center text-slate-400 gap-3">
+                <p class="text-sm font-semibold text-slate-600">No hi ha cap document original carregat</p>
+              </div>
+              <div id="original-content" class="hidden"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-12 opacity-0 pointer-events-none transition-all duration-300 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 text-xs max-w-sm">
+    <div id="toast-icon" class="w-5 h-5 text-emerald-400 shrink-0">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+    </div>
+    <span id="toast-message">Operació realitzada amb èxit</span>
+  </div>
+
+  <!-- Modal d'ajuda per a la secretària -->
+  <div id="help-modal" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 flex flex-col gap-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+          <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          Com funciona a Secretaria?
+        </h3>
+        <button id="btn-close-help" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs text-slate-600 leading-relaxed">
+        <div class="flex gap-2.5">
+          <span class="w-5 h-5 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-[11px] shrink-0">1</span>
+          <p><strong class="text-slate-800">Carregar el Word:</strong> Arrossega qualsevol acta, memòria o informe en format <code class="bg-slate-100 px-1 py-0.5 rounded">.docx</code>.</p>
+        </div>
+        <div class="flex gap-2.5">
+          <span class="w-5 h-5 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-[11px] shrink-0">2</span>
+          <p><strong class="text-slate-800">Triar què extreure:</strong> Pots fer clic directe a les seccions de l'esquerra o escriure el número o el nom de l'apartat: <em>"Punt 3"</em>, <em>"Acords"</em> o <em>"Pressupost"</em>. La cerca es fa per paraules clau.</p>
+        </div>
+        <div class="flex gap-2.5">
+          <span class="w-5 h-5 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-[11px] shrink-0">3</span>
+          <p><strong class="text-slate-800">Enganxar a Google Docs:</strong> Fes clic a <strong>"Copiar formatat"</strong> i després a <strong>"Obrir a Google Docs"</strong>. Al document nou de Google Docs només has de prémer <kbd class="bg-slate-100 border px-1 rounded font-mono">Ctrl + V</kbd> (o <kbd class="bg-slate-100 border px-1 rounded font-mono">Cmd + V</kbd> a Mac) i es mantenen títols, taules i llistes!</p>
+        </div>
+      </div>
+
+      <div class="bg-blue-50/70 p-3 rounded-xl border border-blue-200 text-[11px] text-blue-900 space-y-1">
+        <p class="font-bold flex items-center gap-1.5">
+          <span>🎓</span> Compatible amb Google Workspace institucional:
+        </p>
+        <p>Si tens obert el compte institucional de Google, tria'l al desplegable i el document nou s'obrirà directament dins de l'espai de treball del centre.</p>
+      </div>
+
+      <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-[11px] text-slate-500">
+        🔒 <strong>Privadesa:</strong> El document es processa dins del navegador. El seu contingut no s'envia a cap servidor (només es descarreguen de CDN públics les biblioteques que fan funcionar l'eina).
+      </div>
+
+      <div class="flex justify-end pt-2">
+        <button id="btn-close-help-confirm" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs transition">D'acord, entès</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Estat global de l'aplicació
+    const state = {
+      rawHtml: '',
+      extractedHtml: '',
+      fileName: '',
+      sections: [],
+      activeTab: 'extracted'
+    };
+
+    // Document de mostra per a proves immediates de secretaria
+    const sampleDocumentHtml = `
+      <h1>ACTA DE LA SESSIÓ DE L'EQUIP DIRECTIU (DOCUMENT DE MOSTRA FICTICI)</h1>
+      <p><strong>Data:</strong> 13 d'octubre de 2026 | <strong>Horari:</strong> 09:30 h - 12:30 h</p>
+      <p><strong>Assistents:</strong> Degà, Vicedegana Acadèmica, Vicedegà de Recerca, Secretària Acadèmica i Administrador de Facultat.</p>
+      
+      <h2>1. Benvinguda i aprovació de l'acta anterior</h2>
+      <p>S'inicia la sessió amb la benvinguda del Degà i es revisa l'acta prèvia sense esmenes.</p>
+
+      <h2>2. Deliberacions i Taula d'Acords de l'Equip Directiu</h2>
+      <p>A continuació es detalla el debat dels assumptes tractats i els acords formalment presos pel Consell Directiu:</p>
+      
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 15%;">Codi / Tipus</th>
+            <th style="width: 60%;">Descripció de l'Acord o Assumpte Tractat</th>
+            <th style="width: 25%;">Responsable / Termini</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>A.1</strong></td>
+            <td><strong>Aprovació del calendari acadèmic extraordinari per a les sessions de pràctiques d'hivern.</strong> S'aprova per assentiment de tots els membres del consell.</td>
+            <td>Secretaria Acadèmica (Immediat)</td>
+          </tr>
+          <tr>
+            <td>Debat D.1</td>
+            <td>Es debat la proposta de redistribució dels espais docents a l'edifici principal. No hi ha acord ferm en aquesta sessió; es trasllada a comissió d'infraestructures.</td>
+            <td>Pendent de revisió</td>
+          </tr>
+          <tr>
+            <td><strong>A.2</strong></td>
+            <td><strong>Concessió dels ajuts extraordinaris a la mobilitat internacional de recerca 2026-2027.</strong> S'adjudiquen les 4 partides sol·licitades amb l'informe favorable de vicerectorat.</td>
+            <td>Vicedegà de Recerca (30 oct)</td>
+          </tr>
+          <tr>
+            <td>Informació</td>
+            <td>Estat de la matriculació del segon cicle i balanç d'assistència al servei d'orientació al futur estudiant.</td>
+            <td>Només a títol informatiu</td>
+          </tr>
+          <tr>
+            <td><strong>A.3</strong></td>
+            <td><strong>Validació del pressupost de manteniment informàtic per a les aules docents.</strong> S'aprova la despesa de 6.400 € per a la renovació dels equips multimèdia.</td>
+            <td>Administració Facultat (15 nov)</td>
+          </tr>
+          <tr>
+            <td>Precs i Preguntes</td>
+            <td>Diverses consultes relatives a l'horari d'obertura de biblioteca durant el període d'avaluació continuada.</td>
+            <td>Cap acord associat</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>3. Altres assumptes ordinaris</h2>
+      <p>Sense més assumptes a tractar, s'aixeca la sessió ordinària a les 12:30 hores.</p>
+    `;
+
+    // Elements del DOM
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+    const fileLoadedInfo = document.getElementById('file-loaded-info');
+    const loadedFilename = document.getElementById('loaded-filename');
+    const loadedWordcount = document.getElementById('loaded-wordcount');
+    const fileSizeBadge = document.getElementById('file-size-badge');
+    const btnRemoveFile = document.getElementById('btn-remove-file');
+    const sectionsList = document.getElementById('sections-list');
+    const sectionsCount = document.getElementById('sections-count');
+    const extractionQuery = document.getElementById('extraction-query');
+    const btnExtract = document.getElementById('btn-extract');
+    const btnSampleDoc = document.getElementById('btn-sample-doc');
+    const tabExtracted = document.getElementById('tab-extracted');
+    const tabOriginal = document.getElementById('tab-original');
+    const viewExtracted = document.getElementById('view-extracted');
+    const viewOriginal = document.getElementById('view-original');
+    const extractedPlaceholder = document.getElementById('extracted-placeholder');
+    const extractedContent = document.getElementById('extracted-content');
+    const originalPlaceholder = document.getElementById('original-placeholder');
+    const originalContent = document.getElementById('original-content');
+    const extractionStatusBanner = document.getElementById('extraction-status-banner');
+    const extractionStatusText = document.getElementById('extraction-status-text');
+    const extractionStats = document.getElementById('extraction-stats');
+    const btnCopyDocs = document.getElementById('btn-copy-docs');
+    const btnDownloadWord = document.getElementById('btn-download-word');
+    const btnOpenGdocs = document.getElementById('btn-open-gdocs');
+    const btnDownloadHtml = document.getElementById('btn-download-html');
+    const helpModal = document.getElementById('help-modal');
+    const btnHelpModal = document.getElementById('btn-help-modal');
+    const btnCloseHelp = document.getElementById('btn-close-help');
+    const btnCloseHelpConfirm = document.getElementById('btn-close-help-confirm');
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toast-message');
+
+    function showToast(msg, isSuccess = true) {
+      toastMessage.textContent = msg;
+      toast.classList.remove('translate-y-12', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.add('translate-y-12', 'opacity-0', 'pointer-events-none');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3500);
+    }
+
+    function countWords(htmlString) {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = htmlString;
+      const text = tempDiv.textContent || tempDiv.innerText || '';
+      const words = text.trim().split(/\s+/).filter(w => w.length > 0);
+      return words.length;
+    }
+
+    function updateStepBadges(step) {
+      const b1 = document.getElementById('step-badge-1');
+      const b2 = document.getElementById('step-badge-2');
+      const b3 = document.getElementById('step-badge-3');
+
+      [b1, b2, b3].forEach(b => {
+        b.className = "flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200 transition-all opacity-70";
+        b.querySelector('div').className = "w-7 h-7 rounded-lg bg-slate-400 text-white flex items-center justify-center font-bold text-xs shrink-0";
+      });
+
+      if (step >= 1) {
+        b1.className = "flex items-center gap-3 p-2.5 rounded-xl bg-blue-50/70 border border-blue-200/80 transition-all";
+        b1.querySelector('div').className = "w-7 h-7 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-xs shrink-0";
+      }
+      if (step >= 2) {
+        b2.className = "flex items-center gap-3 p-2.5 rounded-xl bg-amber-50/70 border border-amber-200/80 transition-all";
+        b2.querySelector('div').className = "w-7 h-7 rounded-lg bg-amber-500 text-white flex items-center justify-center font-bold text-xs shrink-0";
+      }
+      if (step >= 3) {
+        b3.className = "flex items-center gap-3 p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-200/80 transition-all";
+        b3.querySelector('div').className = "w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shrink-0";
+      }
+    }
+
+    function parseDocumentSections(htmlString) {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = htmlString;
+      
+      const headings = tempDiv.querySelectorAll('h1, h2, h3');
+      const sections = [];
+
+      headings.forEach((heading, index) => {
+        const title = heading.textContent.trim();
+        let contentHtml = heading.outerHTML;
+        let nextNode = heading.nextElementSibling;
+        
+        while (nextNode && !['H1', 'H2', 'H3'].includes(nextNode.tagName)) {
+          contentHtml += nextNode.outerHTML;
+          nextNode = nextNode.nextElementSibling;
+        }
+
+        sections.push({
+          id: index + 1,
+          tag: heading.tagName.toLowerCase(),
+          title: title,
+          html: contentHtml
+        });
+      });
+
+      return sections;
+    }
+
+    function renderSectionsList(sections) {
+      sectionsList.innerHTML = '';
+      sectionsCount.textContent = sections.length;
+
+      if (sections.length === 0) {
+        sectionsList.innerHTML = `
+          <div class="p-3 text-slate-500 text-center bg-slate-50 rounded-xl border border-slate-200">
+            No s'han detectat encapçalaments automàtics. Pots escriure la cerca o copiar el contingut directament.
+          </div>
+        `;
+        return;
+      }
+
+      sections.forEach(sec => {
+        const btn = document.createElement('button');
+        btn.className = "w-full text-left p-2.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/50 flex items-start gap-2 transition group";
+        
+        const badgeColor = sec.tag === 'h1' ? 'bg-blue-100 text-blue-700' : (sec.tag === 'h2' ? 'bg-purple-100 text-purple-700' : 'bg-slate-100 text-slate-600');
+        
+        btn.innerHTML = `
+          <span class="text-[10px] font-bold px-1.5 py-0.5 rounded uppercase ${badgeColor} shrink-0 mt-0.5">${sec.tag}</span>
+          <span class="font-medium text-slate-800 group-hover:text-blue-700 line-clamp-2 leading-tight">${sec.title}</span>
+        `;
+        btn.addEventListener('click', () => {
+          applyExtraction(sec.html, `Secció: ${sec.title}`);
+        });
+        sectionsList.appendChild(btn);
+      });
+    }
+
+    function loadHtmlDocument(html, fileName, fileSize = '15 KB') {
+      state.rawHtml = html;
+      state.fileName = fileName;
+      state.sections = parseDocumentSections(html);
+
+      // Actualitzar interfície d'origen
+      dropZone.classList.add('hidden');
+      fileLoadedInfo.classList.remove('hidden');
+      fileLoadedInfo.classList.add('flex');
+      loadedFilename.textContent = fileName;
+      loadedWordcount.textContent = `${countWords(html)} paraules al document`;
+      fileSizeBadge.textContent = fileSize;
+      fileSizeBadge.classList.remove('hidden');
+
+      // Actualitzar vista del document complet
+      originalPlaceholder.classList.add('hidden');
+      originalContent.innerHTML = html;
+      originalContent.classList.remove('hidden');
+
+      // Actualitzar llista de seccions
+      renderSectionsList(state.sections);
+
+      updateStepBadges(2);
+      showToast(`Document "${fileName}" carregat correctament!`);
+    }
+
+    // Gestionar càrrega de fitxers .docx reals mitjançant mammoth.js
+    function handleDocxFile(file) {
+      if (!file || !file.name.endsWith('.docx')) {
+        showToast('Si us plau, selecciona un fitxer amb format de Word (.docx)', false);
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const arrayBuffer = event.target.result;
+        mammoth.convertToHtml({ arrayBuffer: arrayBuffer })
+          .then(function(result) {
+            const html = result.value;
+            const fileSizeStr = (file.size / 1024).toFixed(1) + ' KB';
+            loadHtmlDocument(html, file.name, fileSizeStr);
+          })
+          .catch(function(err) {
+            console.error(err);
+            showToast('Hi ha hagut un error en llegir el document Word.', false);
+          });
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    function applyExtraction(extractedHtml, reasonLabel) {
+      state.extractedHtml = extractedHtml;
+      extractedPlaceholder.classList.add('hidden');
+      extractedContent.innerHTML = extractedHtml;
+      extractedContent.classList.remove('hidden');
+
+      const wordCount = countWords(extractedHtml);
+      extractionStatusBanner.classList.remove('hidden');
+      extractionStatusText.textContent = `Fragment seleccionat: ${reasonLabel}`;
+      extractionStats.textContent = `${wordCount} paraules llestes per a Google Docs`;
+
+      // Seleccionar pestanya de resultat
+      switchToTab('extracted');
+      updateStepBadges(3);
+      showToast('Secció extreta correctament! Llest per a Google Docs.');
+    }
+
+    // Extracció basada en paraules clau i números d'apartat de la consulta
+    async function performSmartExtraction(query) {
+      if (!state.rawHtml) {
+        showToast('Primer carrega un document de Word.', false);
+        return;
+      }
+
+      const cleanQuery = query.trim().toLowerCase();
+      if (!cleanQuery) {
+        showToast('Indica quin apartat o fragment vols extreure.', false);
+        return;
+      }
+
+      btnExtract.disabled = true;
+      btnExtract.innerHTML = `
+        <svg class="animate-spin w-4 h-4 text-white" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        Cercant...
+      `;
+
+      // 1. Cercar primer en les seccions detectades per coincidència de títol o número
+      let matchedSection = null;
+
+      // REGLA ESPECIAL: Detectar si es demanen específicament els acords amb 'A' en negreta dins de taules
+      const wantsBoldAAcords = cleanQuery.includes('amb a') || cleanQuery.includes('[a]') || 
+                               cleanQuery.includes('a en negreta') || (cleanQuery.includes('acord') && cleanQuery.includes('taula'));
+
+      if (wantsBoldAAcords) {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = state.rawHtml;
+        const tables = tempDiv.querySelectorAll('table');
+
+        let extractedRows = [];
+        let headerRow = null;
+
+        tables.forEach(table => {
+          const thead = table.querySelector('thead tr');
+          if (thead && !headerRow) {
+            headerRow = thead.outerHTML;
+          }
+
+          const rows = table.querySelectorAll('tbody tr, tr');
+          rows.forEach(tr => {
+            // Comprovem si alguna cel·la conté una 'A' en negreta o inicia amb A (ex: <strong>A</strong>, <b>A.1</b>, <strong>A:</strong>)
+            const html = tr.innerHTML;
+            const containsBoldA = /<(strong|b)>\s*A[\.\d\s\:]*<\/(strong|b)>/i.test(html) ||
+                                  tr.textContent.trim().startsWith('A.') ||
+                                  tr.textContent.trim().startsWith('A1') ||
+                                  tr.textContent.trim().startsWith('A2');
+
+            // Evitar duplicar la fila de capçalera si ja la tenim
+            if (containsBoldA && !tr.querySelector('th')) {
+              extractedRows.push(tr.outerHTML);
+            }
+          });
+        });
+
+        if (extractedRows.length > 0) {
+          const finalTableHtml = `
+            <h3>Acords aprovats per l'Equip Directiu (Extracció d'Acords [A])</h3>
+            <p class="text-xs text-slate-500 mb-2"><em>Filtratge automàtic: Únicament s'han seleccionat les files identificades amb acord ferm en negreta (A).</em></p>
+            <table>
+              ${headerRow ? `<thead>${headerRow}</thead>` : ''}
+              <tbody>
+                ${extractedRows.join('\n')}
+              </tbody>
+            </table>
+          `;
+          applyExtraction(finalTableHtml, "Acords d'Equip Directiu (Taula amb A en negreta)");
+          btnExtract.disabled = false;
+          btnExtract.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"></path></svg> Extreure secció`;
+          return;
+        }
+      }
+
+      for (const sec of state.sections) {
+        const secTitleLower = sec.title.toLowerCase();
+        
+        // Coincidència per número (ex: "apartat 2", "punt 3", "2")
+        const numberMatches = cleanQuery.match(/\b([1-9])\b/);
+        if (numberMatches) {
+          const num = numberMatches[1];
+          if (secTitleLower.startsWith(num + '.') || secTitleLower.includes('apartat ' + num) || secTitleLower.includes('punt ' + num)) {
+            matchedSection = sec;
+            break;
+          }
+        }
+
+        // Coincidència de paraules clau
+        if (cleanQuery.includes('acord') && secTitleLower.includes('acord')) { matchedSection = sec; break; }
+        if (cleanQuery.includes('conclusi') && secTitleLower.includes('conclusi')) { matchedSection = sec; break; }
+        if (cleanQuery.includes('pressupost') && secTitleLower.includes('pressupost')) { matchedSection = sec; break; }
+        if (cleanQuery.includes('sol·licitud') && secTitleLower.includes('sol·licitud')) { matchedSection = sec; break; }
+        if (cleanQuery.includes('tràmit') && secTitleLower.includes('tràmit')) { matchedSection = sec; break; }
+        if (cleanQuery.includes('acta anterior') && secTitleLower.includes('acta anterior')) { matchedSection = sec; break; }
+      }
+
+      if (matchedSection) {
+        applyExtraction(matchedSection.html, matchedSection.title);
+        btnExtract.disabled = false;
+        btnExtract.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"></path></svg> Extreure secció`;
+        return;
+      }
+
+      // 2. Si no coincideix directament, fem una cerca per paraules clau dins del contingut
+      try {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = state.rawHtml;
+        const paragraphs = Array.from(tempDiv.querySelectorAll('p, table, ul, ol, h1, h2, h3'));
+        
+        // Cerca semàntica de paràgrafs que continguin termes de la consulta
+        const queryWords = cleanQuery.split(/\s+/).filter(w => w.length > 3);
+        const matchingParagraphs = paragraphs.filter(p => {
+          const txt = p.textContent.toLowerCase();
+          return queryWords.some(w => txt.includes(w));
+        });
+
+        if (matchingParagraphs.length > 0) {
+          const resultHtml = matchingParagraphs.map(p => p.outerHTML).join('\n');
+          applyExtraction(resultHtml, `Cerca: "${query}"`);
+        } else {
+          // Si no es troba res concret, agafem el contingut més proper
+          showToast(`No hem trobat una secció anomenada "${query}". Prova seleccionant-la directament de la llista d'apartats de l'esquerra.`, false);
+        }
+      } catch (err) {
+        console.error(err);
+        showToast('Hi ha hagut un problema analitzant el document.', false);
+      } finally {
+        btnExtract.disabled = false;
+        btnExtract.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"></path></svg> Extreure secció`;
+      }
+    }
+
+    function copyFormattedToClipboard() {
+      if (!state.extractedHtml) {
+        showToast('Primer has d\'extreure alguna secció!', false);
+        return;
+      }
+
+      // Creació d'element temporal per copiar format HTML ric al porta-retalls
+      const container = document.createElement('div');
+      container.innerHTML = state.extractedHtml;
+      container.style.position = 'fixed';
+      container.style.pointerEvents = 'none';
+      container.style.opacity = '0';
+      document.body.appendChild(container);
+
+      window.getSelection().removeAllRanges();
+      const range = document.createRange();
+      range.selectNode(container);
+      window.getSelection().addRange(range);
+
+      try {
+        const success = document.execCommand('copy');
+        if (success) {
+          showToast('Text copiat amb format! Ara pots enganxar-lo (Ctrl+V) a Google Docs.');
+        } else {
+          showToast('No s\'ha pogut copiar automàticament.', false);
+        }
+      } catch (err) {
+        showToast('Error en copiar al porta-retalls.', false);
+      } finally {
+        window.getSelection().removeAllRanges();
+        document.body.removeChild(container);
+      }
+    }
+
+    function openNewGoogleDoc() {
+      // docs.new és l'enllaç oficial directe de Google per crear un document nou a l'instant
+      copyFormattedToClipboard();
+      
+      const selectAuth = document.getElementById('select-authuser');
+      const authVal = selectAuth ? selectAuth.value : '0';
+      
+      let targetUrl = 'https://docs.new';
+      if (authVal === '1') {
+        targetUrl = 'https://docs.google.com/document/create?authuser=1';
+      }
+
+      window.open(targetUrl, '_blank');
+      showToast('S\'està obrint un Google Doc nou! Prem Ctrl+V per enganxar-hi el contingut.');
+    }
+
+    function downloadWordDoc() {
+      if (!state.extractedHtml) {
+        showToast('Primer has d\'extreure alguna secció!', false);
+        return;
+      }
+
+      const baseName = state.fileName ? state.fileName.replace(/\.docx?$/i, '') : 'Acta';
+      const cleanFileName = `[Acords_Extrets]_${baseName}`;
+
+      // Si la llibreria htmlDocx està carregada, generem un fitxer .docx real
+      if (typeof htmlDocx !== 'undefined' && htmlDocx.asBlob) {
+        try {
+          const styledHtml = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+              <meta charset="utf-8">
+              <style>
+                body { font-family: 'Calibri', 'Segoe UI', Arial, sans-serif; font-size: 11pt; line-height: 1.4; color: #1e293b; }
+                h1 { font-size: 16pt; font-weight: bold; color: #0f172a; margin-bottom: 12pt; }
+                h2 { font-size: 13pt; font-weight: bold; color: #1e293b; margin-top: 14pt; margin-bottom: 6pt; }
+                h3 { font-size: 12pt; font-weight: bold; color: #334155; margin-top: 10pt; margin-bottom: 4pt; }
+                p { margin-bottom: 6pt; }
+                table { width: 100%; border-collapse: collapse; margin-top: 8pt; margin-bottom: 12pt; }
+                th, td { border: 1px solid #94a3b8; padding: 6pt 8pt; font-size: 10pt; }
+                th { background-color: #f1f5f9; font-weight: bold; }
+                strong, b { font-weight: bold; }
+              </style>
+            </head>
+            <body>
+              ${state.extractedHtml}
+            </body>
+            </html>
+          `;
+
+          const blob = htmlDocx.asBlob(styledHtml);
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `${cleanFileName}.docx`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          showToast('Fitxer de Word (.docx) generat i descarregat amb èxit!');
+          return;
+        } catch (err) {
+          console.warn('Fallback a format MS Word nadiu:', err);
+        }
+      }
+
+      // Alternativa nativa universal 100% compatible amb Microsoft Word
+      const wordXmlDoc = `
+        <html xmlns:o='urn:schemas-microsoft-com:office:office'
+              xmlns:w='urn:schemas-microsoft-com:office:word'
+              xmlns='http://www.w3.org/TR/REC-html40'>
+        <head>
+          <meta charset='utf-8'>
+          <title>${cleanFileName}</title>
+          <style>
+            @page { size: A4; margin: 2.5cm; }
+            body { font-family: Calibri, 'Segoe UI', Arial, sans-serif; font-size: 11pt; line-height: 1.35; color: #000; }
+            h1 { font-size: 16pt; font-weight: bold; margin-bottom: 10pt; }
+            h2 { font-size: 13pt; font-weight: bold; margin-top: 12pt; margin-bottom: 6pt; }
+            h3 { font-size: 11.5pt; font-weight: bold; margin-top: 8pt; margin-bottom: 4pt; }
+            table { border-collapse: collapse; width: 100%; margin: 10pt 0; }
+            th, td { border: 1px solid #777777; padding: 6pt 8pt; font-size: 10pt; }
+            th { background-color: #eaeaea; font-weight: bold; }
+            strong, b { font-weight: bold; }
+          </style>
+        </head>
+        <body>
+          ${state.extractedHtml}
+        </body>
+        </html>
+      `;
+      const blob = new Blob(['\ufeff', wordXmlDoc], { type: 'application/msword;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${cleanFileName}.doc`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Fitxer de Word descarregat directament!');
+    }
+
+    function downloadAsHtml() {
+      if (!state.extractedHtml) {
+        showToast('No hi ha contingut extret per descarregar.', false);
+        return;
+      }
+
+      const fullHtmlDoc = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Extret - ${state.fileName || 'Document'}</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; padding: 2rem; color: #222; }
+    table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background: #f4f4f4; }
+  </style>
+</head>
+<body>
+  ${state.extractedHtml}
+</body>
+</html>`;
+
+      const blob = new Blob([fullHtmlDoc], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `[Extraït] - ${state.fileName ? state.fileName.replace('.docx', '') : 'document'}.html`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Fitxer descarregat correctament!');
+    }
+
+    function switchToTab(tab) {
+      state.activeTab = tab;
+      if (tab === 'extracted') {
+        tabExtracted.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-700 border border-slate-200 shadow-sm transition";
+        tabOriginal.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition";
+        viewExtracted.classList.remove('hidden');
+        viewOriginal.classList.add('hidden');
+      } else {
+        tabOriginal.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-700 border border-slate-200 shadow-sm transition";
+        tabExtracted.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition";
+        viewOriginal.classList.remove('hidden');
+        viewExtracted.classList.add('hidden');
+      }
+    }
+
+    tabExtracted.addEventListener('click', () => switchToTab('extracted'));
+    tabOriginal.addEventListener('click', () => switchToTab('original'));
+
+    // Drag and Drop
+    dropZone.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        handleDocxFile(e.target.files[0]);
+      }
+    });
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropZone.classList.add('border-blue-500', 'bg-blue-50/50');
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropZone.classList.remove('border-blue-500', 'bg-blue-50/50');
+      });
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        handleDocxFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    btnRemoveFile.addEventListener('click', () => {
+      state.rawHtml = '';
+      state.extractedHtml = '';
+      state.fileName = '';
+      state.sections = [];
+      fileInput.value = '';
+      dropZone.classList.remove('hidden');
+      fileLoadedInfo.classList.add('hidden');
+      fileLoadedInfo.classList.remove('flex');
+      fileSizeBadge.classList.add('hidden');
+      sectionsList.innerHTML = '<div class="p-4 text-center text-slate-400 italic bg-slate-50 rounded-xl border border-dashed border-slate-200">Encara no s\'ha carregat cap document.</div>';
+      sectionsCount.textContent = '0';
+      originalPlaceholder.classList.remove('hidden');
+      originalContent.classList.add('hidden');
+      originalContent.innerHTML = '';
+      extractedPlaceholder.classList.remove('hidden');
+      extractedContent.classList.add('hidden');
+      extractedContent.innerHTML = '';
+      extractionStatusBanner.classList.add('hidden');
+      updateStepBadges(1);
+      showToast('Document retirat.');
+    });
+
+    // Criteris ràpids i formulari
+    document.querySelectorAll('.quick-filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const query = btn.getAttribute('data-query');
+        extractionQuery.value = query;
+        performSmartExtraction(query);
+      });
+    });
+
+    btnExtract.addEventListener('click', () => {
+      performSmartExtraction(extractionQuery.value);
+    });
+
+    extractionQuery.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        performSmartExtraction(extractionQuery.value);
+      }
+    });
+
+    // Provar amb document de mostra
+    btnSampleDoc.addEventListener('click', () => {
+      loadHtmlDocument(sampleDocumentHtml, 'Acta_Reunio_Secretaria_2026.docx', '28 KB');
+      extractionQuery.value = "Acords i conclusions finals";
+      performSmartExtraction("Acords i conclusions finals");
+    });
+
+    // Botons d'acció de Google Docs
+    btnCopyDocs.addEventListener('click', copyFormattedToClipboard);
+    btnDownloadWord.addEventListener('click', downloadWordDoc);
+    btnOpenGdocs.addEventListener('click', openNewGoogleDoc);
+    btnDownloadHtml.addEventListener('click', downloadAsHtml);
+
+    // Modal d'ajuda
+    btnHelpModal.addEventListener('click', () => helpModal.classList.remove('hidden', 'flex'));
+    btnHelpModal.addEventListener('click', () => helpModal.classList.add('flex'));
+    [btnCloseHelp, btnCloseHelpConfirm].forEach(btn => {
+      btn.addEventListener('click', () => {
+        helpModal.classList.add('hidden');
+        helpModal.classList.remove('flex');
+      });
+    });
+
+    helpModal.addEventListener('click', (e) => {
+      if (e.target === helpModal) {
+        helpModal.classList.add('hidden');
+        helpModal.classList.remove('flex');
+      }
+    });
+  </script>
+</body>
+</html>
