@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aplicacions educatives</title>
+<style>
+  :root {
+    --bg: #f7f6f2; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5e58;
+    --border: #e2e0d8; --accent: #1f5fa8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #161614; --surface: #20201d; --text: #ecebe6; --muted: #a3a29b;
+      --border: #34332f; --accent: #7fb0ea;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 48px 16px 64px; }
+  h1 { font-size: 1.9rem; margin: 0 0 .4rem; letter-spacing: -.01em; }
+  .intro { color: var(--muted); margin: 0 0 2rem; }
+  ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  a.card {
+    display: block; padding: 16px 18px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 10px;
+    color: inherit; text-decoration: none;
+  }
+  a.card:hover, a.card:focus-visible { border-color: var(--accent); outline: none; }
+  .title { font-weight: 600; color: var(--accent); }
+  .desc { color: var(--muted); font-size: .95rem; margin-top: 2px; }
+  footer { margin-top: 3rem; color: var(--muted); font-size: .85rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Aplicacions educatives</h1>
+  <p class="intro">Recull d'aplicacions i recursos interactius per a la docència.</p>
+  <ul id="llista"></ul>
+</main>
+<script>
+  // Afegiu aquí cada aplicació nova: carpeta, títol i descripció breu.
+  const apps = [
+    { carpeta: "e2g", titol: "Simulador gràfic d'equacions de segon grau",
+      desc: "Visualització interactiva de paràboles i les seves arrels." },
+  ];
+  const ul = document.getElementById("llista");
+  for (const a of apps) {
+    const li = document.createElement("li");
+    li.innerHTML = `<a class="card" href="${a.carpeta}/"><div class="title"></div><div class="desc"></div></a>`;
+    li.querySelector(".title").textContent = a.titol;
+    li.querySelector(".desc").textContent = a.desc;
+    ul.appendChild(li);
+  }
+</script>
+</body>
+</html>
