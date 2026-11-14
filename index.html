@@ -3,44 +3,143 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aplicacions educatives</title>
+<title>Miquel Àngel Prats · Aplicacions educatives</title>
+<meta name="description" content="Aplicacions i recursos interactius per a la docència de Miquel Àngel Prats, professor titular de Tecnologia Educativa a la FPCEE Blanquerna (URL).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f7f6f2; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5e58;
-    --border: #e2e0d8; --accent: #1f5fa8;
+    --bg: #f6f3ec; --surface: #fffdf8; --text: #1f1d1a; --muted: #6a655c;
+    --border: #e4ddcf; --accent: #9a3b1f; --accent-soft: #f3e3d8; --ink: #23324a;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #161614; --surface: #20201d; --text: #ecebe6; --muted: #a3a29b;
-      --border: #34332f; --accent: #7fb0ea;
+      --bg: #141312; --surface: #1d1b19; --text: #eeeae2; --muted: #a8a196;
+      --border: #34302b; --accent: #ec8f6c; --accent-soft: #3a261d; --ink: #c9d5ea;
     }
   }
   * { box-sizing: border-box; }
   body {
     margin: 0; background: var(--bg); color: var(--text);
-    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+    font: 16px/1.6 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
-  main { max-width: 760px; margin: 0 auto; padding: 48px 16px 64px; }
-  h1 { font-size: 1.9rem; margin: 0 0 .4rem; letter-spacing: -.01em; }
-  .intro { color: var(--muted); margin: 0 0 2rem; }
-  ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+  a { color: var(--accent); }
+
+  /* Capçalera */
+  header { padding: 64px 0 40px; border-bottom: 1px solid var(--border); }
+  .top { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+  .avatar {
+    width: 84px; height: 84px; border-radius: 50%; flex: none;
+    display: grid; place-items: center; background: var(--ink); color: var(--bg);
+    font: 600 1.9rem/1 Fraunces, Georgia, serif; letter-spacing: .02em;
+  }
+  .eyebrow {
+    margin: 0 0 6px; color: var(--accent); font-size: .78rem; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase;
+  }
+  h1 {
+    margin: 0; font: 600 clamp(2.1rem, 6vw, 3.1rem)/1.05 Fraunces, Georgia, serif;
+    letter-spacing: -.015em;
+  }
+  .role { margin: 8px 0 0; color: var(--muted); font-size: 1rem; }
+  .bio { margin: 28px 0 0; font-size: 1.06rem; max-width: 68ch; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px;
+    border-radius: 999px; border: 1px solid var(--border); background: var(--surface);
+    color: var(--text); text-decoration: none; font-size: .92rem; font-weight: 500;
+  }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  .btn:hover, .btn:focus-visible { border-color: var(--accent); outline: none; }
+  .btn svg { width: 16px; height: 16px; }
+
+  details { margin-top: 28px; max-width: 68ch; }
+  summary {
+    cursor: pointer; font-weight: 600; font-size: .95rem; color: var(--ink);
+    list-style: none; display: inline-flex; align-items: center; gap: 8px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: "+"; font: 600 1.1rem/1 Inter, sans-serif; color: var(--accent); width: 1ch; }
+  details[open] summary::before { content: "–"; }
+  .fites { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 12px; }
+  .fites li { padding-left: 16px; border-left: 2px solid var(--accent-soft); color: var(--muted); font-size: .95rem; }
+  .fites strong { color: var(--text); font-weight: 600; }
+
+  /* Aplicacions */
+  section { padding: 48px 0 24px; }
+  h2 { margin: 0 0 6px; font: 600 1.6rem/1.2 Fraunces, Georgia, serif; }
+  .intro { margin: 0 0 24px; color: var(--muted); }
+  #llista { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
   a.card {
-    display: block; padding: 16px 18px; background: var(--surface);
-    border: 1px solid var(--border); border-radius: 10px;
-    color: inherit; text-decoration: none;
+    display: flex; flex-direction: column; gap: 6px; height: 100%; padding: 18px 20px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    color: inherit; text-decoration: none; transition: border-color .15s, transform .15s;
   }
-  a.card:hover, a.card:focus-visible { border-color: var(--accent); outline: none; }
-  .title { font-weight: 600; color: var(--accent); }
-  .desc { color: var(--muted); font-size: .95rem; margin-top: 2px; }
-  footer { margin-top: 3rem; color: var(--muted); font-size: .85rem; }
+  a.card:hover, a.card:focus-visible { border-color: var(--accent); transform: translateY(-2px); outline: none; }
+  .num { font: 600 .8rem/1 Inter, sans-serif; color: var(--accent); letter-spacing: .08em; }
+  .title { font-weight: 600; font-size: 1.02rem; color: var(--text); }
+  .desc { color: var(--muted); font-size: .92rem; }
+  .go { margin-top: auto; padding-top: 6px; color: var(--accent); font-size: .88rem; font-weight: 500; }
+
+  footer { padding: 32px 0 48px; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--border); margin-top: 32px; }
+  @media (prefers-reduced-motion: reduce) { a.card { transition: none; } a.card:hover { transform: none; } }
 </style>
 </head>
 <body>
-<main>
-  <h1>Aplicacions educatives</h1>
-  <p class="intro">Recull d'aplicacions i recursos interactius per a la docència.</p>
-  <ul id="llista"></ul>
+<header>
+  <div class="wrap">
+    <div class="top">
+      <div class="avatar" aria-hidden="true">MP</div>
+      <div>
+        <p class="eyebrow">Tecnologia educativa · Innovació pedagògica</p>
+        <h1>Miquel Àngel Prats</h1>
+        <p class="role">Professor titular de Tecnologia Educativa · FPCEE Blanquerna, Universitat Ramon Llull</p>
+      </div>
+    </div>
+
+    <p class="bio">Mestre, psicopedagog i doctor en Pedagogia. És investigador responsable de la línia eduTIC del grup de recerca consolidat PSiTIC (Pedagogia, Societat, Innovació i TIC) i coordinador del Màster Universitari en Lideratge de la Innovació Pedagògica i Direcció de Centres Educatius. Compagina l'activitat acadèmica amb la divulgació en diferents mitjans de comunicació.</p>
+
+    <div class="actions">
+      <a class="btn primary" id="correu" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        Contacte
+      </a>
+      <a class="btn" href="https://prats.cat" rel="me">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+        prats.cat
+      </a>
+    </div>
+
+    <details>
+      <summary>Trajectòria i reconeixements</summary>
+      <ul class="fites">
+        <li><strong>Distinció Jaume Vicens Vives</strong> a la innovació docent universitària.</li>
+        <li><strong>XXX Premi Joan Profitós d'Assaig Pedagògic</strong> (2020), amb l'obra <em>10 lliçons per a un ús ètic, saludable i responsable de les tecnologies digitals</em>.</li>
+        <li><strong>Director del Grau d'Educació Infantil</strong> de la FPCEE Blanquerna (2013–2019).</li>
+        <li><strong>Director de les cinc primeres edicions de l'ITworldEdu Summit</strong> (2008–2012).</li>
+        <li><strong>Director del CETEI</strong> de la Fundació Joan XXIII (2008–2011).</li>
+        <li><strong>Vocal de Comunicació</strong> del Col·legi de Pedagogs de Catalunya (2006–2008).</li>
+      </ul>
+    </details>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h2>Aplicacions i recursos</h2>
+    <p class="intro">Eines interactives per a la docència i la gestió educativa. Funcionen directament al navegador.</p>
+    <ul id="llista"></ul>
+  </section>
 </main>
+
+<footer>
+  <div class="wrap">© <span id="any"></span> Miquel Àngel Prats</div>
+</footer>
+
 <script>
   // Afegiu aquí cada aplicació nova: carpeta, títol i descripció breu.
   const apps = [
@@ -52,13 +151,22 @@
       desc: "Extreu un apartat d'un document .docx i passa'l a Google Docs o a un Word nou." },
   ];
   const ul = document.getElementById("llista");
-  for (const a of apps) {
+  apps.forEach((a, i) => {
     const li = document.createElement("li");
-    li.innerHTML = `<a class="card" href="${a.carpeta}/"><div class="title"></div><div class="desc"></div></a>`;
+    li.innerHTML = `<a class="card" href="${a.carpeta}/"><span class="num"></span><span class="title"></span><span class="desc"></span><span class="go">Obre l'aplicació →</span></a>`;
+    li.querySelector(".num").textContent = String(i + 1).padStart(2, "0");
     li.querySelector(".title").textContent = a.titol;
     li.querySelector(".desc").textContent = a.desc;
     ul.appendChild(li);
-  }
+  });
+
+  // El correu es munta en temps d'execució perquè no aparegui com a text pla al codi.
+  const u = "miquelpf", d = ["blanquerna", "url", "edu"].join(".");
+  const correu = document.getElementById("correu");
+  correu.href = "mailto:" + u + "@" + d;
+  correu.title = u + "@" + d;
+
+  document.getElementById("any").textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
